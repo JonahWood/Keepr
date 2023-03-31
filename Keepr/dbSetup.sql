@@ -40,3 +40,15 @@ CREATE TABLE IF NOT EXISTS vaults(
   FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
   FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE
   ) default charset utf8 COMMENT '';
+
+            SELECT
+            acc.*,
+            keeps.*,
+            vk.id AS vkId
+            FROM vaultkeeps vk
+            JOIN accounts acc ON vk.creatorId = acc.id
+            JOIN keeps keeps ON vk.keepId = keeps.id
+            WHERE vk.vaultId = 1;
+
+            SELECT * FROM vaults;
+            SELECT * FROM vaultkeeps;

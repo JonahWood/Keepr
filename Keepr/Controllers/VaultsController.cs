@@ -79,5 +79,22 @@ namespace Keepr.Controllers
             return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("{id}/keeps")]
+        [Authorize]
+        async public Task<ActionResult<Vaultkeep>> GetKeepsInVault(int id)
+        {
+            try 
+            {
+            Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+            string userId = userInfo.Id;
+            List<Vaultkeep> vaultkeeps = _vaultsService.GetKeepsInVault(id, userId);
+            return Ok(vaultkeeps);
+            }
+            catch (Exception e)
+            {
+            return BadRequest(e.Message);
+            }
+        }
     }
 }
