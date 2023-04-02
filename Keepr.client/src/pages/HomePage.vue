@@ -1,27 +1,92 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img
-        src="https://bcw.blob.core.windows.net/public/img/8600856373152463"
-        alt="CodeWorks Logo"
-        class="rounded-circle"
-      >
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+  <div class="Kbody">
+    <div class="row">
+      <section class="grid-container rounded">
+        <div class="" v-for="k in keeps">
+          <KeepCard :keep="k" />
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script>
+import { onMounted, computed } from 'vue';
+import { keepsService } from '../services/KeepsService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
+import { AppState } from "../AppState";
+
 export default {
   setup() {
-    return {}
+    onMounted(() => {
+      getAllKeeps();
+    })
+    async function getAllKeeps() {
+      try {
+        await keepsService.getAllKeeps()
+      } catch (error) {
+        Pop.error(error.message)
+        logger.error(error)
+      }
+    }
+    return {
+      keeps: computed(() => AppState.keeps)
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.Kbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.grid-container {
+  columns: 5 200px;
+  column-gap: 1.5rem;
+  width: 90%;
+  margin: 0 auto;
+
+  div {
+    width: 150px;
+    margin: 0 1.5rem 1.5rem 0;
+    display: inline-block;
+    width: 100%;
+    border: solid 1px black;
+    padding: 5px;
+    box-shadow: 2px 2px 2px #00000080;
+    border-radius: 5px;
+    transition: all .25s ease-in-out;
+
+    &:hover img {
+      filter: grayscale(0);
+    }
+
+    &:hover {
+      border-color: #d4af37;
+      box-shadow: 4px 4px 4px #4d4015c1;
+    }
+
+    img {
+      width: 100%;
+      filter: grayscale(100%);
+      border-radius: 5px;
+      transition: all .25s ease-in-out;
+    }
+
+    p {
+      margin: 5px 0;
+      padding: 0;
+      text-align: center;
+      font-style: italic;
+    }
+  }
+}
+
 .home {
   display: grid;
   height: 80vh;
