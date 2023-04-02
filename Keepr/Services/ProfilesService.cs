@@ -1,12 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Keepr.Services
 {
     public class ProfilesService
     {
-        
+        private readonly ProfilesRepository _repo;
+
+        public ProfilesService(ProfilesRepository repo)
+        {
+            _repo = repo;
+        }
+
+        internal Profile GetProfile(string id)
+        {
+            Profile prof = _repo.GetProfile(id);
+            return prof;
+        }
     }
 }

@@ -4,8 +4,16 @@ CREATE TABLE IF NOT EXISTS accounts(
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   name varchar(255) COMMENT 'User Name',
   email varchar(255) COMMENT 'User Email',
-  picture varchar(255) COMMENT 'User Picture'
+  picture varchar(1000) COMMENT 'User Picture',
+  coverImg VARCHAR(1000)
 ) default charset utf8 COMMENT '';
+DROP TABLE accounts;
+
+            SELECT
+            *
+            FROM accounts
+            WHERE id = "64013315bd1dde3ace531c41";
+
 
 CREATE TABLE IF NOT EXISTS keeps(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -52,3 +60,12 @@ CREATE TABLE IF NOT EXISTS vaults(
 
             SELECT * FROM vaults;
             SELECT * FROM vaultkeeps;
+
+            DROP TABLE keeps;
+            DROP TABLE vaults;
+            DROP TABLE vaultkeeps;
+            DROP TABLE houses;
+            DROP TABLE favorites;
+            DROP TABLE ingredients;
+            DROP TABLE recipes;
+            

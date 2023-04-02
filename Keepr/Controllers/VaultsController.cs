@@ -53,9 +53,10 @@ namespace Keepr.Controllers
             try 
             {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            updateData.CreatorId = userInfo.Id;
+            string userId = userInfo.Id;
+            // updateData.CreatorId = userInfo.Id;
             updateData.Id = id;
-            Vault vault = _vaultsService.EditVault(updateData);
+            Vault vault = _vaultsService.EditVault(updateData, userId);
             return Ok(vault);
             }
             catch (Exception e)

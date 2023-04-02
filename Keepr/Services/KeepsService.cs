@@ -15,9 +15,10 @@ namespace Keepr.Services
             return keep;
         }
 
-        internal string DeleteKeep(int id)
+        internal string DeleteKeep(int id, string userId)
         {
-            Keep keep = _repo.GetOneKeep(id);
+            Keep keep = _repo.GetOneKeep(id, userId);
+            if(keep.CreatorId != userId) throw new UnauthorizedAccessException("You don't belong here");
             _repo.DeleteKeep(id);
             return "Keep was unkept";
         }
@@ -28,9 +29,15 @@ namespace Keepr.Services
             return keeps;
         }
 
+        internal List<Keep> GetKeepsByProfile(string id)
+        {
+            List<Keep> keeps = _repo.GetKeepsByProfile(id);
+            return keeps;
+        }
+
         internal Keep GetOneKeep(int id, string userId)
         {
-            Keep keep = _repo.GetOneKeep(id);
+            Keep keep = _repo.GetOneKeep(id, userId);
             if(keep == null) throw new Exception("There is no Keep with this id");
             // if (keep.CreatorId != userId)
             // // NOTE could do views this way
@@ -38,8 +45,9 @@ namespace Keepr.Services
             return keep;
         }
 
-        internal Keep UpdateKeep(Keep updateData)
+        internal Keep UpdateKeep(Keep updateData, string userId)
         {
+            if(updateData.CreatorId != userId) throw new UnauthorizedAccessException("This is not your keep.");
             Keep original = this.GetOneKeep(updateData.Id, updateData.CreatorId);
             original.Name = updateData.Name != null ? updateData.Name : original.Name;
             original.Description = updateData.Description != null ? updateData.Description : original.Description;

@@ -68,9 +68,10 @@ namespace Keepr.Controllers
             try 
             {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            updateData.CreatorId = userInfo.Id;
+            string userId = userInfo.Id;
+            // updateData.CreatorId = userInfo.Id;
             updateData.Id = id;
-            Keep keep = _keepsService.UpdateKeep(updateData);
+            Keep keep = _keepsService.UpdateKeep(updateData, userId);
             return Ok(keep);
             }
             catch (Exception e)
@@ -86,7 +87,8 @@ namespace Keepr.Controllers
             try 
             {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            String message = _keepsService.DeleteKeep(id);
+            string userId = userInfo.Id;
+            String message = _keepsService.DeleteKeep(id, userId);
             return Ok(message);
             }
             catch (Exception e)

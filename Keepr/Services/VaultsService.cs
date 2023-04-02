@@ -26,8 +26,9 @@ private readonly VaultKeepsService _vaultKeepsService;
             return $"{vault.Name} has been compressed into dust.";
         }
 
-        internal Vault EditVault(Vault updateData)
+        internal Vault EditVault(Vault updateData, string userId)
         {
+            if(updateData.CreatorId != userId) throw new UnauthorizedAccessException("This is not your vault.");
             Vault original = this.GetOneVault(updateData.Id, updateData.CreatorId);
             original.Name = updateData.Name != null ? updateData.Name : original.Name;
             original.Description = updateData.Description != null ? updateData.Description : original.Description;
@@ -50,6 +51,18 @@ private readonly VaultKeepsService _vaultKeepsService;
             if(vault == null) throw new Exception("There is no vault with that id");
             if(vault.IsPrivate == true && vault.CreatorId != userId) throw new Exception("This album has been made private");
             return vault;
+        }
+
+        internal List<Vault> GetUserVaults(string id)
+        {
+            List<Vault> vaults = _repo.GetUserVaults(id);
+            return vaults;
+        }
+
+        internal List<Vault> GetVaultsByProfile(string id)
+        {
+            List<Vault> vaults = _repo.GetVaultsByProfile(id);
+            return vaults;
         }
     }
 }
