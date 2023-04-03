@@ -24,6 +24,7 @@ export default {
     })
     async function getAllKeeps() {
       try {
+        AppState.keeps = []
         await keepsService.getAllKeeps()
       } catch (error) {
         Pop.error(error.message)

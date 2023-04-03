@@ -27,6 +27,17 @@ CREATE TABLE IF NOT EXISTS keeps(
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
+SELECT
+* FROM keeps
+WHERE creatorId = "64013315bd1dde3ace531c41";
+
+            SELECT
+            kee.*,
+            acc.*
+            FROM keeps kee
+            JOIN accounts acc ON kee.creatorId = acc.id
+            WHERE kee.creatorId = "64013315bd1dde3ace531c41";
+
 CREATE TABLE IF NOT EXISTS vaults(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   creatorId VARCHAR(255) NOT NULL,
@@ -69,3 +80,5 @@ CREATE TABLE IF NOT EXISTS vaults(
             DROP TABLE ingredients;
             DROP TABLE recipes;
             
+            SELECT * FROM keeps
+            WHERE id = 37;
