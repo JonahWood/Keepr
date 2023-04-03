@@ -82,3 +82,4 @@ CREATE TABLE IF NOT EXISTS vaults(
             
             SELECT * FROM keeps
             WHERE id = 37;
+            SELECT * FROM vaultkeeps;

@@ -4,6 +4,7 @@ import { AppState } from "../AppState";
 
 class KeepsService{
     async getAllKeeps(){
+    AppState.keeps = []
         const res = await api.get('api/keeps')
         // logger.log(res.data)
         AppState.keeps = res.data
@@ -16,6 +17,7 @@ class KeepsService{
     }
 
     async GetMyKeeps(){
+    AppState.keeps = []
         const res = await api.get('api/keeps')
         const keeps = res.data.filter(k => k.creatorId == AppState.account.id)
         AppState.keeps = keeps

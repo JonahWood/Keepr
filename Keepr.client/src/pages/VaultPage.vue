@@ -20,6 +20,7 @@ import { vaultsService } from '../services/VaultsService';
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState';
 import { onMounted } from 'vue';
+import { vkService } from '../services/VKService'
 
 export default {
     setup() {
@@ -35,8 +36,20 @@ export default {
                 router.push({ name: 'Home' })
             }
         }
+
+        async function getVaultKeeps() {
+            try {
+                const vaultId = route.params.vaultId
+                await vkService.getVaultKeeps(vaultId)
+            }
+            catch (error) {
+                Pop.error(error.message)
+                logger.error(error)
+            }
+        }
         onMounted(() => {
             getVaultById();
+            getVaultKeeps();
         })
         return {
             vault: computed(() => AppState.activeVault),
