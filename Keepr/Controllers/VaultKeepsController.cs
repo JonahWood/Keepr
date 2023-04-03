@@ -6,11 +6,13 @@ namespace Keepr.Controllers
     {
         private readonly VaultKeepsService _vaultKeepsService;
         private readonly Auth0Provider _auth;
+        private readonly VaultsService _vaultsService;
 
-        public VaultKeepsController(VaultKeepsService vaultKeepsService, Auth0Provider auth)
+        public VaultKeepsController(VaultKeepsService vaultKeepsService, Auth0Provider auth, VaultsService vaultsService)
         {
             _vaultKeepsService = vaultKeepsService;
             _auth = auth;
+            _vaultsService = vaultsService;
         }
 
         [HttpPost]
@@ -22,7 +24,8 @@ namespace Keepr.Controllers
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
             if(userInfo == null)throw new Exception("You must be logged in to create a vault keep.");
             vkData.CreatorId = userInfo.Id;
-            Vaultkeep vaultkeep = _vaultKeepsService.CreateVK(vkData);
+            Vault vault = _vaultsService.GetOneVault(vkData.Id ,vkData.CreatorId);
+            Vaultkeep vaultkeep = _vaultKeepsService.CreateVK(vkData, vault);
             vaultkeep.CreatorId = userInfo.Id;
             return Ok(vaultkeep);
             }
