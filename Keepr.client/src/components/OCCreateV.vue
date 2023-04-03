@@ -1,13 +1,13 @@
 <template>
-    <div class="modal fade" id="CreateKeep" tabindex="-1" aria-labelledby="CreateKeepLabel" aria-hidden="true">
+    <div class="modal fade" id="CreateVault" tabindex="-1" aria-labelledby="CreateVaultLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-bg">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="CreateKeepLabel">Add Your Keep</h1>
+                    <h1 class="modal-title fs-5" id="CreateVaultLabel">Open Your Vault</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form @submit.prevent="createKeep()">
+                    <form @submit.prevent="createVault()">
                         <div class="mb-2">
                             <label for="name">Name</label>
                             <input required v-model="editable.name" type="text" class="form-control" id="name">
@@ -34,25 +34,22 @@
 
 
 <script>
-import { ref } from 'vue'
-import { keepsService } from '../services/KeepsService'
-import { vaultsService } from '../services/VaultsService'
-import { logger } from '../utils/Logger'
-import Pop from '../utils/Pop'
+import { ref } from 'vue';
+import Pop from '../utils/Pop';
+import { logger } from '../utils/Logger';
 
 export default {
     setup() {
         const editable = ref({})
         return {
             editable,
-            async createKeep() {
+            async createVault() {
                 try {
                     const formData = editable.value
-                    await keepsService.createKeep(formData)
+                    await vaultsService.createVault(formData)
                     Pop.success('Keep Created')
                     editable.value = []
-                }
-                catch (error) {
+                } catch (error) {
                     Pop.error(error.message)
                     logger.error(error)
                 }

@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="row mt-md-5">
-                                    <div class="col-md-12 d-flex align-self-center">
+                                    <div class="col-md-12 d-flex align-self-center justify-content-center">
                                         <span>
                                             <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}</h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>

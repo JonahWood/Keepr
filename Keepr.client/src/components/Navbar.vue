@@ -18,8 +18,9 @@
             Home
           </router-link>
           <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
-            data-bs-target="#CreateVault">Create Keep</button>
-          <button class="btn create-button ms-md-2 bg-gradient">Create Vault</button>
+            data-bs-target="#CreateKeep">Create Keep</button>
+          <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
+            data-bs-target="#CreateVault">Create Vault</button>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
@@ -28,6 +29,7 @@
   </nav>
 
   <OCCreateK />
+  <OCCreateV />
 </template>
 
 <script>
@@ -36,7 +38,8 @@ import { vaultsService } from '../services/VaultsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import Login from './Login.vue'
-import OCCreateK from '../components/OCCreateK.vue'
+import OCCreateV from './OCCreateV.vue';
+import OCCreateK from '../components/OCCreateK.vue';
 
 export default {
   setup() {
@@ -44,7 +47,7 @@ export default {
 
     }
   },
-  components: { Login }
+  components: { Login, OCCreateV, OCCreateK }
 }
 </script>
 

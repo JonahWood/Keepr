@@ -1,7 +1,10 @@
 <template>
-    <h4 class="vTitle text-light rounded elevation-5 selectable text-uppercase"
-        :style="`background-image: url(${vault?.img})`">{{
-            vault?.name }} <i v-if="vault?.isPrivate" class="mdi mdi-lock text-warning" title="This vault is private."></i></h4>
+    <router-link class="selectable" :to="{ name: 'Vault', params: { vaultId: vault.id } }">
+        <h4 class="vTitle text-light rounded elevation-5 selectable text-uppercase"
+            :style="`background-image: url(${vault?.img})`">{{
+                vault?.name }} <i v-if="vault?.isPrivate" class="mdi mdi-lock text-warning" title="This vault is private."></i>
+        </h4>
+    </router-link>
 </template>
 
 

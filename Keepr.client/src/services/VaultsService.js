@@ -10,6 +10,13 @@ async getMyVaults(){
 async createVault(formData){
 logger.log('creating vault')
 }
+
+async getVaultById(vaultId){
+AppState.activeVault = null
+const res = await api.get('api/vaults/' + vaultId)
+AppState.activeVault = res.data
+logger.log('vault:', res.data)
+}
 }
 
 export const vaultsService = new VaultsService();
