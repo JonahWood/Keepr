@@ -24,7 +24,7 @@ namespace Keepr.Controllers
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
             if(userInfo == null)throw new Exception("You must be logged in to create a vault keep.");
             vkData.CreatorId = userInfo.Id;
-            Vault vault = _vaultsService.GetOneVault(vkData.Id ,vkData.CreatorId);
+            Vault vault = _vaultsService.GetOneVault(vkData.VaultId ,vkData.CreatorId);
             Vaultkeep vaultkeep = _vaultKeepsService.CreateVK(vkData, vault);
             vaultkeep.CreatorId = userInfo.Id;
             return Ok(vaultkeep);

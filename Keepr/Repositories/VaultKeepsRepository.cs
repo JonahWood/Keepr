@@ -41,13 +41,13 @@ public VaultKeepsRepository(IDbConnection db)
             SELECT
             acc.*,
             keeps.*,
+            vau.*,
             vk.id AS vkId
             FROM vaultkeeps vk
             JOIN accounts acc ON vk.creatorId = acc.id
             JOIN keeps keeps ON vk.keepId = keeps.id
-            WHERE vk.vaultId = 1;
-
-
+            JOIN vaults vau ON vk.vaultId = vau.id
+            WHERE vk.vaultId = 1 AND vau.isPrivate != true;
             ";
             List<Vaultkeep> vaultkeeps = _db.Query<Vaultkeep>(sql, new {vaultId}).ToList();
             return vaultkeeps;
