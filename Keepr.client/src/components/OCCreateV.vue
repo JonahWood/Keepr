@@ -37,17 +37,22 @@
 import { ref } from 'vue';
 import Pop from '../utils/Pop';
 import { logger } from '../utils/Logger';
+import { vaultsService } from '../services/VaultsService';
+import { router } from '../router';
+import { useRouter } from 'vue-router';
 
 export default {
     setup() {
         const editable = ref({})
+        const router = useRouter()
         return {
             editable,
             async createVault() {
                 try {
                     const formData = editable.value
-                    await vaultsService.createVault(formData)
-                    Pop.success('Keep Created')
+                    const vault = await vaultsService.createVault(formData)
+                    router.push({ name: 'Vault', params: { vaultId: vault.id } })
+                    Pop.success('Vault Opened')
                     editable.value = []
                 } catch (error) {
                     Pop.error(error.message)

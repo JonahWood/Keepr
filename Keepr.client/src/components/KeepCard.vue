@@ -66,8 +66,12 @@
                                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                                             </ul>
                                         </div>
-                                        <h6><img class="profile-picture" :src="account?.picture" alt=""> {{ account?.name }}
-                                        </h6>
+                                        <router-link @="getProfile(activeKeep?.creator.id)" class="selectable"
+                                            :to="{ name: 'Profile', params: { profileId: profile?.Id } }">
+                                            <h6><img class="profile-picture" :src="activeKeep?.creator.picture" alt=""> {{
+                                                activeKeep?.creator.name }}
+                                            </h6>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -86,6 +90,7 @@ import { AppState } from "../AppState";
 import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
+import { profilesService } from '../services/ProfilesService'
 
 
 export default {
@@ -94,9 +99,19 @@ export default {
         return {
             activeKeep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
+            profile: computed(() => AppState.profile),
             async setActive(id) {
                 try {
                     await keepsService.setActive(id)
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            },
+            async getProfile(id) {
+                try {
+                    await profilesService.getProfile(id)
                 }
                 catch (error) {
                     Pop.error(error.message)

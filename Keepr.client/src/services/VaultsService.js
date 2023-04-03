@@ -1,4 +1,5 @@
 import { AppState } from "../AppState";
+import { router } from "../router";
 import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
 
@@ -8,7 +9,9 @@ async getMyVaults(){
     AppState.vaults = res.data
 }
 async createVault(formData){
-logger.log('creating vault')
+const res = await api.post('api/vaults', formData)
+const vault = res.data
+return vault
 }
 
 async getVaultById(vaultId){
