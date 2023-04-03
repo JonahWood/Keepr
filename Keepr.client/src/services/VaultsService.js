@@ -7,8 +7,8 @@ async getMyVaults(){
     const res = await api.get('account/vaults')
     AppState.vaults = res.data
 }
-async createVault(){
-logger.log('ceaering vault')
+async createVault(formData){
+logger.log('creating vault')
 }
 }
 

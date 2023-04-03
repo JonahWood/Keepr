@@ -21,8 +21,9 @@ class KeepsService{
         AppState.keeps = keeps
         logger.log(AppState.keeps)
     }
-    async createKeep(){
-        logger.log('cretaiong keps')
+    async createKeep(formData){
+const res = await api.post('api/keeps', formData)
+AppState.keeps.push(res.data)
     }
 }
 

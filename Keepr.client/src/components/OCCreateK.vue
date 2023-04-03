@@ -8,6 +8,17 @@
                 </div>
                 <div class="modal-body">
                     <form @submit.prevent="createKeep()">
+                        <div class="mb-2">
+                            <label for="name">Name</label>
+                            <input required v-model="editable.name" type="text" class="form-control" id="name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="Description">Description</label>
+                            <input required v-model="editable.Description" type="text" class="form-control"
+                                id="Description">
+                        </div>
+                        <label for="Img">Img</label>
+                        <input required v-model="editable.Img" type="text" class="form-control" id="Img">
 
 
                         <div class="d-flex justify-content-end">
@@ -22,6 +33,7 @@
 
 
 <script>
+import { ref } from 'vue'
 import { keepsService } from '../services/KeepsService'
 import { vaultsService } from '../services/VaultsService'
 import { logger } from '../utils/Logger'
@@ -29,18 +41,24 @@ import Pop from '../utils/Pop'
 
 export default {
     setup() {
+        const editable = ref({})
         return {
-            async createVault() {
-                try {
-                    await vaultsService.createVault()
-                } catch (error) {
-                    Pop.error(error.message)
-                    logger.error(error)
-                }
-            },
+            editable,
+            // async createVault() {
+            //     try {
+            //         const formData = editable.value
+            //         await vaultsService.createVault(formData)
+            //         Pop.success('Keep Created')
+            //     } catch (error) {
+            //         Pop.error(error.message)
+            //         logger.error(error)
+            //     }
+            // },
             async createKeep() {
                 try {
-                    await keepsService.createKeep()
+                    const formData = editable.value
+                    await keepsService.createKeep(formData)
+                    Pop.success('Keep Created')
                 }
                 catch (error) {
                     Pop.error(error.message)
