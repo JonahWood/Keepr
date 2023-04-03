@@ -21,6 +21,9 @@ class KeepsService{
         AppState.keeps = keeps
         logger.log(AppState.keeps)
     }
+    async createKeep(){
+        logger.log('cretaiong keps')
+    }
 }
 
 export const keepsService = new KeepsService();
