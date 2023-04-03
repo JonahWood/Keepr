@@ -83,3 +83,13 @@ CREATE TABLE IF NOT EXISTS vaults(
             SELECT * FROM keeps
             WHERE id = 37;
             SELECT * FROM vaultkeeps;
+                        SELECT
+            acc.*,
+            keeps.*,
+            vau.*,
+            vk.id AS vkId
+            FROM vaultkeeps vk
+            JOIN accounts acc ON vk.creatorId = acc.id
+            JOIN keeps keeps ON vk.keepId = keeps.id
+            JOIN vaults vau ON vk.vaultId = vau.id
+            WHERE vk.vaultId = 60 AND vau.isPrivate != true;
