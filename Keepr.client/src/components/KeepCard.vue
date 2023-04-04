@@ -144,6 +144,7 @@ export default {
             },
             async addKeep() {
                 try {
+
                     const keepId = this.activeKeep.id
                     await vkService.addVaultKeep({
                         ...editable.value,

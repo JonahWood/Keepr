@@ -52,7 +52,7 @@ namespace Keepr.Controllers
             try 
             {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-            Keep keep = _keepsService.GetOneKeep(id, userInfo.Id);
+            Keep keep = _keepsService.GetOneKeep(id, userInfo?.Id);
             return Ok(keep);
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace Keepr.Controllers
             {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
             string userId = userInfo.Id;
-            updateData.CreatorId = userInfo.Id;
+            // updateData.CreatorId = userInfo.Id;
             updateData.Id = id;
             Keep keep = _keepsService.UpdateKeep(updateData, userId);
             return Ok(keep);

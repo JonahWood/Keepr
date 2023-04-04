@@ -3,17 +3,19 @@ namespace Keepr.Services
     public class VaultKeepsService
     {
         private readonly VaultKeepsRepository _repo;
-        // private readonly VaultsService _vaultsService;
+        private readonly KeepsService _keepsService;
 
-        public VaultKeepsService(VaultKeepsRepository repo)
+        public VaultKeepsService(VaultKeepsRepository repo, KeepsService keepsService)
         {
             _repo = repo;
-            // _vaultsService = vaultsService;
+            _keepsService = keepsService;
         }
 
         internal Vaultkeep CreateVK(Vaultkeep vkData, Vault vault)
         {
             // Vault vault = _vaultsService.GetOneVault(vkData.Id ,vkData.CreatorId);
+            Keep keep = _keepsService.GetOneKeep(vkData.KeepId, vkData.CreatorId);
+            keep.Kept += 1;
             if(vault.CreatorId != vkData.CreatorId) throw new Exception("You don't own this vault.");
             Vaultkeep vaultkeep = _repo.CreateVK(vkData);
             return vaultkeep;
