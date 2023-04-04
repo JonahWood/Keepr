@@ -69,7 +69,7 @@ namespace Keepr.Controllers
             {
             Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
             string userId = userInfo.Id;
-            // updateData.CreatorId = userInfo.Id;
+            updateData.CreatorId = userInfo.Id;
             updateData.Id = id;
             Keep keep = _keepsService.UpdateKeep(updateData, userId);
             return Ok(keep);
