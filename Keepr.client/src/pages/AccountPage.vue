@@ -12,7 +12,9 @@
     </section>
     <section class="row justify-content-center">
       <div class="col-md-1 d-flex justify-content-center">
-        <h1>{{ account.name }}</h1>
+        <h1 class="selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample">
+          {{ account.name }}</h1>
       </div>
     </section>
     <section class="row justify-content-center">
@@ -37,19 +39,46 @@
       </div>
     </section>
   </div>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <form @submit.prevent="editAccount()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input v-model="editable.name" type="text" minLength="3" maxlength="15" class="form-control" id="name"
+            name="name">
+        </div>
+        <div>
+          <label for="picture" class="form-label">Picture URL</label>
+          <input v-model="editable.picture" class="form-control" id="picture" type="text">
+        </div>
+        <div>
+          <label for="coverImg" class="form-label">CoverImg</label>
+          <input v-model="editable.coverImg" class="form-control" id="coverImg" type="text">
+        </div>
+        <button data-bs-dismiss="offcanvas" class="btn btn-success" type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { vaultsService } from '../services/VaultsService'
 import { keepsService } from '../services/KeepsService'
 import KeepCard from '../components/KeepCard.vue'
+import { accountService } from '../services/AccountService'
 
 export default {
   setup() {
+    const editable = ref({})
     async function getMyVaults() {
       try {
         AppState.vaults = [];
@@ -77,7 +106,18 @@ export default {
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      editable,
+      async editAccount() {
+        try {
+          const formData = editable.value
+          await accountService.editAccount(formData)
+        }
+        catch (error) {
+          Pop.error(error.message)
+          logger.error(error)
+        }
+      }
     };
   },
   components: { KeepCard }
