@@ -29,6 +29,11 @@ class KeepsService{
 const res = await api.post('api/keeps', formData)
 AppState.keeps.push(res.data)
     }
+
+    async getProfileKeeps(){
+        const res = await api.get('api/profiles/' + AppState.profile.id + '/keeps')
+        AppState.keeps = res.data
+    }
 }
 
 export const keepsService = new KeepsService();
