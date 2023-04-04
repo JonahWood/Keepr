@@ -11,7 +11,7 @@
                     <div class="form-check form-switch align-items-center d-flex">
                         <input v-model="editable.isPrivate" @click="makePrivate(vault?.id)" class="form-check-input"
                             type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Make Private?</label>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Toggle Privacy</label>
                     </div>
                 </h6>
             </div>
