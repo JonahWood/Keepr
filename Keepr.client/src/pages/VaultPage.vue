@@ -16,6 +16,11 @@
                 </h6>
             </div>
         </section>
+        <section class="row mt-2 justify-content-center">
+            <div class="col-1 keepCount">
+                {{ keeps.length }} Keeps
+            </div>
+        </section>
         <div class="row mt-2">
             <section class="grid-container rounded">
                 <div v-for="k in keeps" class="col-md-3">
@@ -49,7 +54,7 @@ export default {
                 await vaultsService.getVaultById(vaultId);
             }
             catch (error) {
-                Pop.error(error.message);
+                Pop.error('This vault is private');
                 logger.error(error);
                 router.push({ name: "Home" });
             }
@@ -93,6 +98,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.keepCount {
+    font-family: 'Marko One', serif;
+    color: #636E72;
+}
+
 .grid-container {
     columns: 5 200px;
     column-gap: 1.5rem;

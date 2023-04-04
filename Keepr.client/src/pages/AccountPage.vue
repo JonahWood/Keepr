@@ -30,7 +30,7 @@
     </section>
     <section class="row">
       <div class="col-12">
-        <h2>My Vaults</h2>
+        <h2>My Keeps</h2>
       </div>
       <div class="col-3" v-for="k in keeps">
         <KeepCardAcc :keep="k" />

@@ -121,3 +121,5 @@ CREATE TABLE IF NOT EXISTS vaults(
             JOIN keeps k ON vk.keepId = k.id
             JOIN accounts acc ON k.creatorId = acc.id
             WHERE vk.vaultId = 56;
+
+            SELECT * FROM vaults WHERE creatorId = "6427113305281d90164d02f3";
