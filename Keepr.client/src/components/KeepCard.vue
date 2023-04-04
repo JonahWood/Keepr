@@ -66,8 +66,8 @@
                                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                                             </ul>
                                         </div>
-                                        <h6 title="`Go to this persons page?`'" class="selectable"><img
-                                                class="profile-picture" :src="creator?.picture" alt="">
+                                        <h6 @click="goToProfilePage(creator?.id)" title="`Go to this persons page?`'"
+                                            class="selectable"><img class="profile-picture" :src="creator?.picture" alt="">
                                             {{
                                                 creator?.name }}
                                         </h6>
@@ -91,11 +91,13 @@ import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { profilesService } from '../services/ProfilesService'
 import { Modal } from 'bootstrap';
+import { useRouter } from 'vue-router';
 
 
 export default {
     props: { keep: { type: Object, required: true } },
     setup() {
+        const router = useRouter()
         return {
             activeKeep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
@@ -115,6 +117,17 @@ export default {
             async getProfile(id) {
                 try {
                     await profilesService.getProfile(id)
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            },
+            async goToProfilePage(id) {
+                try {
+                    await profilesService.getProfile(id)
+                    router.push({ name: 'Profile', params: { profileId: id } })
+                    Modal.getOrCreateInstance('#KeepCardModal').hide()
                 }
                 catch (error) {
                     Pop.error(error.message)
