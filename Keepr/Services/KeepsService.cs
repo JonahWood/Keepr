@@ -48,8 +48,8 @@ namespace Keepr.Services
         internal Keep UpdateKeep(Keep updateData, string userId)
         {
             // updateData.CreatorId = userId;
-            if(updateData.CreatorId != userId) throw new UnauthorizedAccessException("This is not your keep.");
             Keep original = this.GetOneKeep(updateData.Id, updateData.CreatorId);
+            if(original.CreatorId != userId) throw new UnauthorizedAccessException("This is not your keep.");
             original.Name = updateData.Name != null ? updateData.Name : original.Name;
             original.Description = updateData.Description != null ? updateData.Description : original.Description;
             original.Img = updateData.Img != null ? updateData.Img : original.Img;

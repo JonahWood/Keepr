@@ -28,8 +28,8 @@ private readonly VaultKeepsService _vaultKeepsService;
 
         internal Vault EditVault(Vault updateData, string userId)
         {
-            if(updateData.CreatorId != userId) throw new UnauthorizedAccessException("This is not your vault.");
             Vault original = this.GetOneVault(updateData.Id, updateData.CreatorId);
+            if(original.CreatorId != userId) throw new UnauthorizedAccessException("This is not your vault.");
             original.Name = updateData.Name != null ? updateData.Name : original.Name;
             original.Description = updateData.Description != null ? updateData.Description : original.Description;
             original.Img = updateData.Img != null ? updateData.Img : original.Img;
