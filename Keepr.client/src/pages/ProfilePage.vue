@@ -1,4 +1,6 @@
-<template></template>
+<template>
+    a
+</template>
 
 
 <script>

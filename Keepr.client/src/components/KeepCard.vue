@@ -66,7 +66,8 @@
                                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                                             </ul>
                                         </div>
-                                        <h6><img class="profile-picture" :src="creator?.picture" alt="">
+                                        <h6 title="`Go to this persons page?`'" class="selectable"><img
+                                                class="profile-picture" :src="creator?.picture" alt="">
                                             {{
                                                 creator?.name }}
                                         </h6>
