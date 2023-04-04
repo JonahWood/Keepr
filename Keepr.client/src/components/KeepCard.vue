@@ -254,7 +254,7 @@ export default {
 }
 
 .keep-img {
-    // height: 40vh;
+    min-height: 450px;
     min-width: 100% !important;
 }
 </style>
