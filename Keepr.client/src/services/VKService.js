@@ -4,9 +4,10 @@ import { api } from "./AxiosService";
 
 class VKService{
 async getVaultKeeps(vaultId){
+    AppState.keeps = []
     const res = await api.get('api/vaults/' + vaultId + '/keeps')
     logger.log('ze keeps in this vault:', res.data)
-    AppState.keeps = []
+    AppState.keeps = res.data
 }
 }
 
