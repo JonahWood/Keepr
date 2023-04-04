@@ -17,9 +17,17 @@ async addVaultKeep(VKdata){
     logger.log('add vk', res.data)
 }
 
-async removeFromVault(keepId){
-    logger.log('vkservice 21:', keepId)
-    // const res = await api.get
+async removeFromVault(vkId){
+    const res = await api.delete('api/vaultkeeps/'+vkId)
+    const vkIndex = AppState.keeps.findIndex(v => v.vaultKeepId == vkId)
+    if (vkIndex >= 0) {
+        AppState.keeps.splice(vkIndex, 1)
+    }
+}
+
+setActiveVK(id){
+    const AVK = AppState.keeps.find(k => k.id == id)
+    AppState.activeVK = AVK
 }
 }
 

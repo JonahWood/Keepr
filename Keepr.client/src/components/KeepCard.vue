@@ -33,8 +33,7 @@
                                     <div class="col-md-12 d-flex align-self-center justify-content-center">
                                         <span>
                                             <span v-if="activeVault?.creatorId == account?.id && keepBool"
-                                                class="selectable"
-                                                @click="removeFromVault(activeKeep?.id, activeVault?.id)"><i
+                                                class="selectable" @click="removeFromVault(activeVK?.vaultKeepId)"><i
                                                     class="mdi mdi-minus-box"></i></span>
                                             <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
                                                     v-if="activeKeep?.creatorId == account?.id" class="selectable"
@@ -140,12 +139,15 @@ export default {
             myVaults: computed(() => AppState.vaults),
             keepBool: computed(() => AppState.keepBool),
             activeVault: computed(() => AppState.activeVault),
+            activeVK: computed(() => AppState.activeVK),
             async setActive(id) {
                 try {
                     await keepsService.setActive(id)
                     Modal.getOrCreateInstance("#KeepCardModal").show()
                     await vaultsService.getMyVaults()
                     logger.log('vaults:', AppState.vaults)
+                    await vkService.setActiveVK(id)
+                    logger.log('THIS IS THE ACTIVE VK:', AppState.activeVK)
                 }
                 catch (error) {
                     Pop.error('[SET ACTIVE KEEP]', error.message)
@@ -199,10 +201,11 @@ export default {
                     logger.error(error)
                 }
             },
-            async removeFromVault(keepId, vaultId) {
+            async removeFromVault(vkId) {
                 try {
+                    logger.log('vkId', vkId)
                     if (await Pop.confirm("Are you sure you'd like to remove this keep from this album?")) {
-                        await vkService.removeFromVault(keepId)
+                        await vkService.removeFromVault(vkId)
                         Pop.success('Keep removed from vault')
                         Modal.getOrCreateInstance('#KeepCardModal').hide()
 

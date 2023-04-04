@@ -67,6 +67,7 @@ export default {
             try {
                 const vaultId = route.params.vaultId;
                 await vkService.getVaultKeeps(vaultId);
+                logger.log('Appstate keeps:', AppState.keeps)
             }
             catch (error) {
                 Pop.error(error.message);
