@@ -103,8 +103,10 @@ export default {
 }
 
 .accImg {
-    border-radius: 50%;
-    transform: translate(0rem, -5.5vh);
+    border-radius: 50% !important;
+    transform: translate(0rem, -5.5vh) !important;
+    height: 120px !important;
+    width: 120px !important;
     /* border: 1px solid whitesmoke; */
 }
 </style>
