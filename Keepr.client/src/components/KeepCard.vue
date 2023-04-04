@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
-                                        <div v-if="vaults">
+                                        <div>
                                             <form @submit.prevent="addKeep()">
                                                 <select v-model="editable.vaultId" class="form-select mb-3" required>
                                                     <option v-for="v in myVaults" :value="v.id">{{ v.name }}</option>
