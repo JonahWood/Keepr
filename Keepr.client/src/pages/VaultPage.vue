@@ -6,6 +6,14 @@
                 </h1>
                 <h6 class="creator text-light d-flex justify-content-center align-items-end">by {{
                     vault?.creator.name }}</h6>
+                <h6 v-if="vault?.creatorId == account.id"
+                    class="text-light vTitle d-flex justify-content-center align-items-end">
+                    <div class="form-check form-switch align-items-center d-flex">
+                        <input v-model="editable.isPrivate" @click="makePrivate(vault?.id)" class="form-check-input"
+                            type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Make Private?</label>
+                    </div>
+                </h6>
             </div>
         </section>
         <div class="row mt-2">
@@ -26,7 +34,7 @@ import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { vkService } from '../services/VKService'
 import KeepCard from '../components/KeepCard.vue';
 
@@ -34,6 +42,7 @@ export default {
     setup() {
         const route = useRoute();
         const router = useRouter();
+        const editable = ref({})
         async function getVaultById() {
             try {
                 const vaultId = route.params.vaultId;
@@ -64,7 +73,18 @@ export default {
         return {
             vault: computed(() => AppState.activeVault),
             keeps: computed(() => AppState.keeps),
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+            editable,
+            async makePrivate(vaultId) {
+                try {
+                    const isPrivate = editable.value
+                    await vaultsService.makePrivate(vaultId, isPrivate)
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            }
         };
     },
     components: { KeepCard }

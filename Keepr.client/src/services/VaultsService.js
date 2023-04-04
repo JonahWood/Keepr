@@ -25,6 +25,11 @@ async getProfileVaults(){
     const res = await api.get('/api/profiles/' + AppState.profile.id +'/vaults')
     AppState.vaults = res.data
 }
+
+async makePrivate(vaultId, isPrivate){
+    const res = await api.put(`api/vaults/${vaultId}`, isPrivate)
+    logger.log('MakePrivate:', res.data)
+}
 }
 
 export const vaultsService = new VaultsService();
