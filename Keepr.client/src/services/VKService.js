@@ -9,6 +9,13 @@ async getVaultKeeps(vaultId){
     logger.log('ze keeps in this vault:', res.data)
     AppState.keeps = res.data
 }
+
+async addVaultKeep(VKdata){
+
+    const res = await api.post('api/vaultkeeps', VKdata)
+    
+    logger.log('add vk', res.data)
+}
 }
 
 

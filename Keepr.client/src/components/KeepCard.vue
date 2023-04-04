@@ -55,16 +55,15 @@
                                 </div>
                                 <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                Add to vault
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
+                                        <div class="">
+                                            <form @submit.prevent="addKeep()">
+                                                <select v-model="editable.vaultId" class="form-select mb-3" required>
+                                                    <option v-for="v in myVaults" :value="v.id">{{ v.name }}</option>
+                                                </select>
+                                                <div class="text-end">
+                                                    <button data-bs-dismiss="offcanvas" class="btn btn-success">Add</button>
+                                                </div>
+                                            </form>
                                         </div>
                                         <h6 @click="goToProfilePage(creator?.id)" title="`Go to this persons page?`'"
                                             class="selectable"><img class="profile-picture" :src="creator?.picture" alt="">
@@ -84,7 +83,7 @@
 
 
 <script>
-import { onMounted, computed, watchEffect } from 'vue';
+import { onMounted, computed, watchEffect, ref } from 'vue';
 import { AppState } from "../AppState";
 import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
@@ -92,22 +91,28 @@ import Pop from '../utils/Pop';
 import { profilesService } from '../services/ProfilesService'
 import { Modal } from 'bootstrap';
 import { useRouter } from 'vue-router';
+import { vaultsService } from '../services/VaultsService';
+import { vkService } from '../services/VKService';
 
 
 export default {
     props: { keep: { type: Object, required: true } },
     setup() {
         const router = useRouter()
+        const editable = ref({})
         return {
             activeKeep: computed(() => AppState.activeKeep),
+            editable,
             account: computed(() => AppState.account),
             profile: computed(() => AppState.profile),
             creator: computed(() => AppState.activeCreator),
+            myVaults: computed(() => AppState.vaults),
             async setActive(id) {
                 try {
                     await keepsService.setActive(id)
                     Modal.getOrCreateInstance("#KeepCardModal").show()
-                    logger.log()
+                    await vaultsService.getMyVaults()
+                    logger.log('vaults:', AppState.vaults)
                 }
                 catch (error) {
                     Pop.error('[SET ACTIVE KEEP]', error.message)
@@ -128,6 +133,20 @@ export default {
                     await profilesService.getProfile(id)
                     router.push({ name: 'Profile', params: { profileId: id } })
                     Modal.getOrCreateInstance('#KeepCardModal').hide()
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            },
+            async addKeep() {
+                try {
+                    const keepId = this.activeKeep.id
+                    await vkService.addVaultKeep({
+                        ...editable.value,
+                        keepId: keepId,
+                    })
+                    Pop.success(`Added ${this.activeKeep.name} to your vault.`)
                 }
                 catch (error) {
                     Pop.error(error.message)
