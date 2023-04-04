@@ -42,7 +42,7 @@ import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
 import { computed } from '@vue/reactivity';
 import { AppState } from '../AppState';
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { vkService } from '../services/VKService'
 import KeepCard from '../components/KeepCard.vue';
 
@@ -62,6 +62,7 @@ export default {
                 router.push({ name: "Home" });
             }
         }
+
         async function getVaultKeeps() {
             try {
                 const vaultId = route.params.vaultId;
@@ -78,6 +79,7 @@ export default {
                 getVaultKeeps();
             }
         });
+
         return {
             vault: computed(() => AppState.activeVault),
             keeps: computed(() => AppState.keeps),

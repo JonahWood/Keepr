@@ -100,13 +100,17 @@ namespace Keepr.Repositories
         {
             string sql = @"
             SELECT
-            k.*,
+            vk.*,
+            COUNT(kee.id) AS Kept,
             vk.id AS vaultKeepId,
+            vk.creatorId AS VKCreatorId,
+            kee.*,
             acc.*
             FROM vaultkeeps vk
-            JOIN keeps k ON vk.keepId = k.id
-            JOIN accounts acc ON k.creatorId = acc.id
-            WHERE vk.vaultId = @id;
+            JOIN accounts acc ON acc.id = vk.creatorId
+            JOIN keeps kee ON kee.id = vk.keepId
+            WHERE vk.vaultId = @id
+            GROUP BY vk.id;
             ";
             List<KV> keeps = _db.Query<KV, Profile, KV>(sql, (vk, account) => 
             {

@@ -16,6 +16,11 @@ async addVaultKeep(VKdata){
     
     logger.log('add vk', res.data)
 }
+
+async removeFromVault(keepId){
+    logger.log('vkservice 21:', keepId)
+    // const res = await api.get
+}
 }
 
 

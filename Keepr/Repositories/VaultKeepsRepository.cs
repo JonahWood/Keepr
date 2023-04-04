@@ -42,7 +42,7 @@ public VaultKeepsRepository(IDbConnection db)
             SELECT
             vk.*,
             COUNT(kee.id) AS Kept,
-            vk.id AS vkId,
+            vk.id AS vaultKeepId,
             vk.creatorId AS VKCreatorId,
             kee.*,
             acc.*
@@ -51,6 +51,7 @@ public VaultKeepsRepository(IDbConnection db)
             JOIN keeps kee ON kee.id = vk.keepId
             WHERE vk.vaultId = @vaultId
             GROUP BY vk.id;
+            SELECT LAST_INSERT_ID();
             ";
             return _db.Query<Vaultkeep, Profile, Vaultkeep>(sql, (keep, prof) => 
             {

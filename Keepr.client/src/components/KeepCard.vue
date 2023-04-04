@@ -32,6 +32,10 @@
                                 <div class="row mt-md-5">
                                     <div class="col-md-12 d-flex align-self-center justify-content-center">
                                         <span>
+                                            <span v-if="activeVault?.creatorId == account?.id && keepBool"
+                                                class="selectable"
+                                                @click="removeFromVault(activeKeep?.id, activeVault?.id)"><i
+                                                    class="mdi mdi-minus-box"></i></span>
                                             <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
                                                     v-if="activeKeep?.creatorId == account?.id" class="selectable"
                                                     @click="deleteKeep(activeKeep?.id)"><i
@@ -86,14 +90,14 @@
 
 
 <script>
-import { onMounted, computed, watchEffect, ref } from 'vue';
+import { onMounted, computed, watchEffect, ref, onUnmounted } from 'vue';
 import { AppState } from "../AppState";
 import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { profilesService } from '../services/ProfilesService'
 import { Modal } from 'bootstrap';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { vaultsService } from '../services/VaultsService';
 import { vkService } from '../services/VKService';
 
@@ -102,7 +106,31 @@ export default {
     props: { keep: { type: Object, required: true } },
     setup() {
         const router = useRouter()
+        const route = useRoute()
         const editable = ref({})
+        function setBoolTrue() {
+            AppState.keepBool = true
+        }
+
+        function setBoolFalse() {
+            AppState.keepBool = false
+        }
+        async function setActiveVault() {
+            try {
+                await vaultsService.setActiveVault(route.params.vaultId)
+            }
+            catch (error) {
+                Pop.error(error.message)
+                logger.error(error)
+            }
+        }
+
+        onMounted(() => {
+            setBoolTrue()
+        })
+        onUnmounted(() => {
+            setBoolFalse()
+        })
         return {
             activeKeep: computed(() => AppState.activeKeep),
             editable,
@@ -110,6 +138,8 @@ export default {
             profile: computed(() => AppState.profile),
             creator: computed(() => AppState.activeCreator),
             myVaults: computed(() => AppState.vaults),
+            keepBool: computed(() => AppState.keepBool),
+            activeVault: computed(() => AppState.activeVault),
             async setActive(id) {
                 try {
                     await keepsService.setActive(id)
@@ -162,6 +192,20 @@ export default {
                     if (await Pop.confirm("Are you sure you'd like to delete this keep?")) {
                         await keepsService.deleteKeep(keepId)
                         Modal.getOrCreateInstance('#KeepCardModal').hide()
+                    }
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            },
+            async removeFromVault(keepId, vaultId) {
+                try {
+                    if (await Pop.confirm("Are you sure you'd like to remove this keep from this album?")) {
+                        await vkService.removeFromVault(keepId)
+                        Pop.success('Keep removed from vault')
+                        Modal.getOrCreateInstance('#KeepCardModal').hide()
+
                     }
                 }
                 catch (error) {

@@ -34,6 +34,12 @@ async makePrivate(vaultId, isPrivate){
 async deleteVault(vaultId){
     const res = await api.delete('api/vaults/' + vaultId)
 }
+
+async setActiveVault(vaultId){
+    AppState.activeVault = null
+    const res = await api.get('api/vaults/' + vaultId)
+    AppState.activeVault = res.data
+}
 }
 
 export const vaultsService = new VaultsService();
