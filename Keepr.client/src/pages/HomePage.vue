@@ -2,7 +2,7 @@
   <div class="Kbody">
     <div class="row">
       <section class="grid-container rounded">
-        <div class="" v-for="k in keeps">
+        <div class="col-6 col-md-3" v-for="k in keeps">
           <KeepCard :keep="k" />
         </div>
       </section>
@@ -47,7 +47,7 @@ export default {
 }
 
 .grid-container {
-  columns: 5 200px;
+  columns: 4 200px;
   column-gap: 1.5rem;
   width: 90%;
   margin: 0 auto;
@@ -104,6 +104,50 @@ export default {
       width: 100%;
       object-fit: contain;
       object-position: center;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .grid-container {
+    columns: 2 100px;
+    column-gap: 1.5rem;
+    width: 90%;
+    margin: 0 auto;
+
+    div {
+      width: 150px;
+      margin: 0 1.5rem 1.5rem 0;
+      display: inline-block;
+      width: 100%;
+      border: solid 1px black;
+      padding: 5px;
+      box-shadow: 2px 2px 2px #00000080;
+      border-radius: 5px;
+      transition: all .25s ease-in-out;
+
+      &:hover img {
+        filter: grayscale(0);
+      }
+
+      &:hover {
+        border-color: #d4af37;
+        box-shadow: 4px 4px 4px #4d4015c1;
+      }
+
+      img {
+        width: 100%;
+        filter: grayscale(100%);
+        border-radius: 5px;
+        transition: all .25s ease-in-out;
+      }
+
+      p {
+        margin: 5px 0;
+        padding: 0;
+        text-align: center;
+        font-style: italic;
+      }
     }
   }
 }
