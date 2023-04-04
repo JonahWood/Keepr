@@ -35,22 +35,29 @@ public VaultKeepsRepository(IDbConnection db)
         }
 
 // NOTE doesnt quite pass the test but still works? we'll see how it goes on the front end lol
+// NOTE for some reason the VK always has the ID of the keep, not sure why or if this will even matter 
         internal List<Vaultkeep> GetKeepsInVault(int vaultId)
         {
             string sql = @"
             SELECT
-            acc.*,
-            keeps.*,
-            vau.*,
-            vk.id AS vkId
+            vk.*,
+            COUNT(kee.id) AS Kept,
+            vk.id AS vkId,
+            vk.creatorId AS VKCreatorId,
+            kee.*,
+            acc.*
             FROM vaultkeeps vk
-            JOIN accounts acc ON vk.creatorId = acc.id
-            JOIN keeps keeps ON vk.keepId = keeps.id
-            JOIN vaults vau ON vk.vaultId = vau.id
-            WHERE vk.vaultId = @vaultId AND vau.isPrivate != true;
+            JOIN accounts acc ON acc.id = vk.creatorId
+            JOIN keeps kee ON kee.id = vk.keepId
+            WHERE vk.vaultId = @vaultId
+            GROUP BY vk.id;
             ";
-            List<Vaultkeep> vaultkeeps = _db.Query<Vaultkeep>(sql, new {vaultId}).ToList();
-            return vaultkeeps;
+            return _db.Query<Vaultkeep, Profile, Vaultkeep>(sql, (keep, prof) => 
+            {
+                keep.Creator = prof;
+                return keep;
+            }, new {vaultId}).ToList();
+            
         }
 
         internal void DeleteVK(int id)
