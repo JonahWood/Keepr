@@ -112,3 +112,12 @@ CREATE TABLE IF NOT EXISTS vaults(
             JOIN keeps kee ON kee.id = vk.keepId
             WHERE vk.vaultId = 56;
             GROUP BY vk.id;
+
+                        SELECT
+            k.*,
+            vk.id AS vaultKeepId,
+            acc.*
+            FROM vaultkeeps vk
+            JOIN keeps k ON vk.keepId = k.id
+            JOIN accounts acc ON k.creatorId = acc.id
+            WHERE vk.vaultId = 56;
