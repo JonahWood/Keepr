@@ -32,7 +32,10 @@
                                 <div class="row mt-md-5">
                                     <div class="col-md-12 d-flex align-self-center justify-content-center">
                                         <span>
-                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}
+                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
+                                                    v-if="activeKeep?.creatorId == account?.id" class="selectable"
+                                                    @click="deleteKeep(activeKeep?.id)"><i
+                                                        class="mdi mdi-delete-forever"></i></span>
                                             </h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>
                                         </span>
@@ -147,6 +150,18 @@ export default {
                         keepId: keepId,
                     })
                     Pop.success(`Added ${this.activeKeep.name} to your vault.`)
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            },
+            async deleteKeep(keepId) {
+                try {
+                    if (await Pop.confirm("Are you sure you'd like to delete this keep?")) {
+                        await keepsService.deleteKeep(keepId)
+                        Modal.getOrCreateInstance('#KeepCardModal').hide()
+                    }
                 }
                 catch (error) {
                     Pop.error(error.message)

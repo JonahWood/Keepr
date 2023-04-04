@@ -34,6 +34,14 @@ AppState.keeps.push(res.data)
         const res = await api.get('api/profiles/' + AppState.profile.id + '/keeps')
         AppState.keeps = res.data
     }
+
+    async deleteKeep(keepId){
+        const res = await api.delete('api/keeps/' + keepId)
+        const keepIndex = AppState.keeps.findIndex(k => k.id == keepId)
+        if (keepIndex >= 0) {
+            AppState.keeps.splice(keepIndex, 1)
+        }
+    }
 }
 
 export const keepsService = new KeepsService();

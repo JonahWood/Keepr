@@ -28,7 +28,10 @@
                                 <div class="row mt-md-5">
                                     <div class="col-md-12 d-flex align-self-center">
                                         <span>
-                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}</h1>
+                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
+                                                    v-if="activeKeep?.creatorId == account?.id" class="selectable"
+                                                    @click="deleteKeep(activeKeep?.id)"><i
+                                                        class="mdi mdi-delete-forever"></i></span></h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>
                                         </span>
                                     </div>
@@ -50,17 +53,6 @@
                                 </div>
                                 <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                Add to vault
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
                                         <h6><img class="profile-picture" :src="account?.picture" alt=""> {{ account?.name }}
                                         </h6>
                                     </div>
@@ -81,6 +73,7 @@ import { AppState } from "../AppState";
 import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
+import { Modal } from 'bootstrap';
 
 
 export default {
@@ -97,6 +90,18 @@ export default {
                     Pop.error(error.message)
                     logger.error(error)
                 }
+            },
+            async deleteKeep(keepId) {
+                try {
+                    if (await Pop.confirm("Are you sure you'd like to delete this keep?")) {
+                        await keepsService.deleteKeep(keepId)
+                        Modal.getOrCreateInstance('#KeepCardModal').hide()
+                    }
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
             }
         }
     }
@@ -105,10 +110,21 @@ export default {
 
 
 <style lang="scss" scoped>
+.profile-picture {
+    height: 4vh;
+    width: 4vh;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .vTitle {
     min-height: 20vh;
     width: 100%;
     font-family: 'Marko One', serif;
     text-shadow: 2px 2px 2px black;
+}
+
+.keep-title {
+    font-family: 'Marko One', serif;
 }
 </style>
