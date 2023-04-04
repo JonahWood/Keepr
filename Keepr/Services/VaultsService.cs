@@ -38,18 +38,19 @@ private readonly VaultKeepsService _vaultKeepsService;
             return original;
         }
 
-        internal List<Vaultkeep> GetKeepsInVault(int id, string userId)
+        internal List<KV> GetKeepsInVault(int id, string userId)
         {
-            Vault vault = this.GetOneVault(id, userId);
-            List<Vaultkeep> vaultkeeps = _vaultKeepsService.GetKeepsInVault(id);
-            return vaultkeeps;
+            Vault vault = GetOneVault(id, userId);
+            if(vault.IsPrivate == true && vault.CreatorId != userId) throw new UnauthorizedAccessException("This vault has been made private");
+            List<KV> vaultKeeps = _repo.GetVKByVaultId(id);
+            return vaultKeeps;
             }
 
         internal Vault GetOneVault(int id, string userId)
         {
             Vault vault = _repo.GetOneVault(id);
             if(vault == null) throw new Exception("There is no vault with that id");
-            if(vault.IsPrivate == true && vault.CreatorId != userId) throw new Exception("This album has been made private");
+            if(vault.IsPrivate == true && vault.CreatorId != userId) throw new Exception("This vault has been made private");
             return vault;
         }
 

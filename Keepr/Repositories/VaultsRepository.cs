@@ -95,5 +95,25 @@ namespace Keepr.Repositories
             List<Vault> vaults = _db.Query<Vault>(sql, new {id}).ToList();
             return vaults;
         }
+
+        internal List<KV> GetVKByVaultId(int id)
+        {
+            string sql = @"
+            SELECT
+            k.*,
+            vk.id AS vaultKeepId,
+            acc.*
+            FROM vaultkeeps vk
+            JOIN keeps k ON vk.keepId = k.id
+            JOIN accounts acc ON k.creatorId = acc.id
+            WHERE vk.vaultId = @id;
+            ";
+            List<KV> keeps = _db.Query<KV, Profile, KV>(sql, (vk, account) => 
+            {
+                vk.Creator = account;
+                return vk;
+            }, new {id}).ToList();
+            return keeps;
+        }
     }
 }
