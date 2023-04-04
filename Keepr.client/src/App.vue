@@ -1,6 +1,6 @@
 <template>
   <header>
-    <Navbar class="mb-2" />
+    <Navbar class="mb-2 sticky-top" />
   </header>
   <main>
     <router-view />
