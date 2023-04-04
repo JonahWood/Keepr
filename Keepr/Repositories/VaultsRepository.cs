@@ -58,7 +58,7 @@ namespace Keepr.Repositories
             JOIN accounts acc ON vau.creatorId = acc.id
             WHERE vau.id = @id
             ";
-            Vault vault = _db.Query<Vault, Profile, Vault>(sql, (vault, prof) => 
+            Vault vault = _db.Query<Vault, Account, Vault>(sql, (vault, prof) => 
             {
                 vault.Creator = prof;
                 return vault;
