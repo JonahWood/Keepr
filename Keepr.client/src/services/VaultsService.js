@@ -30,6 +30,10 @@ async makePrivate(vaultId, isPrivate){
     const res = await api.put(`api/vaults/${vaultId}`, isPrivate)
     logger.log('MakePrivate:', res.data)
 }
+
+async deleteVault(vaultId){
+    const res = await api.delete('api/vaults/' + vaultId)
+}
 }
 
 export const vaultsService = new VaultsService();

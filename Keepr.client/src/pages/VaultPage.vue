@@ -19,6 +19,9 @@
         <section class="row mt-2 justify-content-center">
             <div class="col-1 keepCount">
                 {{ keeps.length }} Keeps
+                <div class="d-flex justify-content-center" v-if="vault?.creatorId == account.id">
+                    <h3><i class="mdi mdi-delete-forever text-danger selectable" @click="deleteVault(vault?.id)"></i></h3>
+                </div>
             </div>
         </section>
         <div class="row mt-2">
@@ -84,6 +87,19 @@ export default {
                 try {
                     const isPrivate = editable.value
                     await vaultsService.makePrivate(vaultId, isPrivate)
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            },
+            async deleteVault(vaultId) {
+                try {
+                    if (await Pop.confirm("Are you sure you'd like to delete this vault?")) {
+                        await vaultsService.deleteVault(vaultId)
+                        router.push({ name: "Home" });
+                        Pop.success('Vault deleted')
+                    }
                 }
                 catch (error) {
                     Pop.error(error.message)
