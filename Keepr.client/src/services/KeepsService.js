@@ -16,7 +16,9 @@ class KeepsService{
         // logger.log('active:', res.data)
         AppState.activeKeep = res.data
         // logger.log('creator', res.data.creator)
-        AppState.activeCreator = res.data.creator
+        if (res.data.creator) {
+            AppState.activeCreator = res.data.creator
+        }
     }
 
     async GetMyKeeps(){

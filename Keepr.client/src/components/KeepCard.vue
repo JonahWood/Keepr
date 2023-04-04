@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
-                                        <div class="">
+                                        <div v-if="vaults">
                                             <form @submit.prevent="addKeep()">
                                                 <select v-model="editable.vaultId" class="form-select mb-3" required>
                                                     <option v-for="v in myVaults" :value="v.id">{{ v.name }}</option>
@@ -107,9 +107,6 @@ export default {
         const router = useRouter()
         const route = useRoute()
         const editable = ref({})
-        function setBoolTrue() {
-            AppState.keepBool = true
-        }
 
         function setBoolFalse() {
             AppState.keepBool = false
@@ -124,12 +121,12 @@ export default {
             }
         }
 
-        onMounted(() => {
-            setBoolTrue()
-        })
-        onUnmounted(() => {
-            setBoolFalse()
-        })
+        // onMounted(() => {
+        //     setBoolTrue()
+        // })
+        // onUnmounted(() => {
+        //     setBoolFalse()
+        // })
         return {
             activeKeep: computed(() => AppState.activeKeep),
             editable,

@@ -63,6 +63,13 @@ export default {
             }
         }
 
+        function setBoolTrue() {
+            AppState.keepBool = true
+        }
+        function setBoolFalse() {
+            AppState.keepBool = false
+        }
+
         async function getVaultKeeps() {
             try {
                 const vaultId = route.params.vaultId;
@@ -75,12 +82,15 @@ export default {
             }
         }
         onMounted(() => {
+            setBoolTrue()
             if (AppState.account != {}) {
                 getVaultById();
                 getVaultKeeps();
             }
         });
-
+        onUnmounted(() => {
+            setBoolFalse()
+        })
         return {
             vault: computed(() => AppState.activeVault),
             keeps: computed(() => AppState.keeps),
