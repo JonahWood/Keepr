@@ -7,9 +7,9 @@
             <div class="col-md-6 d-flex justify-content-center align-items-center">
                 <h1 class="keep-title">{{ keep?.name }}
                     <br /><span class="k-desc">{{ keep?.description }}</span>
-                    <div class="on-hover creator-name">by {{ keep?.creator.name }}
+                    <!-- <div class="on-hover creator-name">by {{ keep?.creator.name }}
                         <img class="profile-picture elevation-5" :src="keep?.creator.picture" alt="">
-                    </div>
+                    </div> -->
                 </h1>
             </div>
         </div>
