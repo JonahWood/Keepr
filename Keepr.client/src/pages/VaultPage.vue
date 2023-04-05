@@ -102,6 +102,7 @@ export default {
                     if (await Pop.confirm("Are you sure you want to make this vault private?", "This cannot be undone!")) {
                         const isPrivate = { isPrivate: true }
                         await vaultsService.makePrivate(vaultId, isPrivate)
+                        Pop.toast(`${AppState.activeVault.name} has been made private.`)
                     }
                 }
                 catch (error) {
