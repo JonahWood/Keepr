@@ -22,13 +22,13 @@
                             <div class="col-md-5">
                                 <img class="img-fluid keep-img" :src="activeKeep?.img" alt="">
                             </div>
-                        <div class="col-md-7 d-flex align-items-center">
+                        <div class="col-md-7 d-flex align-items-center justify-content-center">
                             <div class="row">
                                 <!-- <div class="col-md-12 d-flex justify-content-center">
                                         <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views }}
-                                                            | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
-                                                            }}</h6>
-                                                    </div> -->
+                                                                        | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
+                                                                        }}</h6>
+                                                                </div> -->
                                 </div>
                                 <div class="row mt-md-5">
                                     <div class="col-md-12">
@@ -185,6 +185,7 @@ export default {
                     if (await Pop.confirm("Are you sure you'd like to delete this keep?")) {
                         await keepsService.deleteKeep(keepId)
                         Modal.getOrCreateInstance('#KeepCardModal').hide()
+                        Pop.success('Keep deleted')
                     }
                 }
                 catch (error) {
@@ -247,7 +248,7 @@ export default {
 }
 
 .views {
-    color: #636E72;
+    color: #000000;
 }
 
 .keep-img {
