@@ -16,6 +16,10 @@ public VaultKeepsRepository(IDbConnection db)
             VALUES
             (@keepId, @vaultId, @creatorId);
             SELECT LAST_INSERT_ID();
+            UPDATE keeps
+            SET
+            kept = kept + 1
+            WHERE id = @keepId;
             ";
             int id = _db.ExecuteScalar<int>(sql, vkData);
             vkData.Id = id;
