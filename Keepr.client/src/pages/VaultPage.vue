@@ -8,10 +8,9 @@
                     vault?.creator.name }}</h6>
                 <h6 v-if="vault?.creatorId == account.id"
                     class="text-light vTitle d-flex justify-content-center align-items-end">
-                    <div class="form-check form-switch align-items-center d-flex">
-                        <input v-model="editable.isPrivate" @click="makePrivate(vault?.id)" class="form-check-input"
-                            type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Toggle Privacy</label>
+                    <div class="align-items-center d-flex">
+                        <button v-if="!vault?.isPrivate" class="btn big-btn" @click="makePrivate(vault?.id)"><i
+                                class="mdi mdi-lock text-warning"></i></button>
                     </div>
                 </h6>
             </div>
@@ -100,8 +99,10 @@ export default {
             editable,
             async makePrivate(vaultId) {
                 try {
-                    const isPrivate = editable.value
-                    await vaultsService.makePrivate(vaultId, isPrivate)
+                    if (await Pop.confirm("Are you sure you want to make this vault private?", "This cannot be undone!")) {
+                        const isPrivate = { isPrivate: true }
+                        await vaultsService.makePrivate(vaultId, isPrivate)
+                    }
                 }
                 catch (error) {
                     Pop.error(error.message)
@@ -129,6 +130,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.big-btn {
+    font-size: 48px;
+}
+
 .keepCount {
     font-family: 'Marko One', serif;
     color: #636E72;
