@@ -8,7 +8,7 @@
         </div>
         <div class="d-flex justify-content-between mt-1">
             {{ keep?.name }}
-            <img :title="keep?.keep.creator.name" class="profile-picture" :src="keep?.creator.picture" alt="">
+            <img :title="keep?.creator.name" class="profile-picture" :src="keep?.creator.picture" alt="">
         </div>
     </div>
 
