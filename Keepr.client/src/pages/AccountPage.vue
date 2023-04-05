@@ -27,7 +27,7 @@
       <div class="col-12">
         <h2>My Vaults</h2>
       </div>
-      <div class="col-3" v-for="v in vaults">
+      <div class="col-md-3" v-for="v in vaults">
         <VaultCard :vault="v" />
       </div>
     </section>
@@ -35,8 +35,11 @@
       <div class="col-12">
         <h2>My Keeps</h2>
       </div>
-      <div class="col-3" v-for="k in keeps">
+      <div class="col-md-3" v-for="k in keeps">
         <KeepCardAcc :keep="k" />
+      </div>
+      <div class="col-md-3" v-if="keeps.length == 0">
+        No Keeps!
       </div>
     </section>
   </div>
@@ -128,7 +131,7 @@ export default {
 
 <style scoped>
 .lengths {
-  color: rgb(117, 117, 117);
+  color: rgb(0, 0, 0);
 }
 
 .coverImg {

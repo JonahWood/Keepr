@@ -49,12 +49,12 @@
                                 <div class="row">
                                     <div class="col-12">&nbsp;</div>
                                 </div>
-                                <div class="row d-flex align-self-end">
+                                <!-- <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
                                         <h6><img class="profile-picture" :src="account?.picture" alt=""> {{ account?.name }}
                                         </h6>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

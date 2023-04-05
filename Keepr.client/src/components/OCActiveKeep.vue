@@ -27,21 +27,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">&nbsp;</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">&nbsp;</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">&nbsp;</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">&nbsp;</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">&nbsp;</div>
-                                    </div>
+
                                     <div class="row d-flex align-self-end">
                                         <div class="col-md-12 d-flex justify-content-between">
                                             <div class="dropdown">

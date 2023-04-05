@@ -15,6 +15,8 @@ async addVaultKeep(VKdata){
     const res = await api.post('api/vaultkeeps', VKdata)
     
     logger.log('add vk', res.data)
+
+    // FIXME after this request fires off, find the keep that was just added, and make his kept count go up
 }
 
 async removeFromVault(vkId){

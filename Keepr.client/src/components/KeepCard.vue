@@ -6,7 +6,7 @@
         <div>
             <img class="img-fluid" :src="keep?.img" alt="">
         </div>
-        <div class="d-flex justify-content-between mt-1">
+        <div class="d-flex justify-content-between mt-1 move-stuff">
             {{ keep?.name }}
             <img :title="keep?.creator.name" class="profile-picture" :src="keep?.creator.picture" alt="">
         </div>
@@ -224,6 +224,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.move-stuff {
+    transform: translateY(-5vh);
+    color: white;
+    text-shadow: 2px 2px 1px black;
+}
+
 .profile-picture {
     height: 4vh;
     width: 4vh;

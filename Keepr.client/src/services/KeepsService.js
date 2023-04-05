@@ -39,8 +39,8 @@ logger.log('createdKeep:', AppState.createdKeep)
 
     }
 
-    async getProfileKeeps(){
-        const res = await api.get('api/profiles/' + AppState.profile.id + '/keeps')
+    async getProfileKeeps(profileId){
+        const res = await api.get('api/profiles/' + profileId + '/keeps')
         AppState.keeps = res.data
     }
 

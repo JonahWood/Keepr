@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <section class="row justify-content-center mt-2">
-            <div class="col-6 rounded" :style="`background-image: url(${vault?.img})`">
+            <div class="col-6 rounded makecover" :style="`background-image: url(${vault?.img})`">
                 <h1 class="text-uppercase vTitle text-light d-flex justify-content-center align-items-end">{{ vault?.name }}
                 </h1>
                 <h6 class="creator text-light d-flex justify-content-center align-items-end">by {{
@@ -9,8 +9,8 @@
                 <h6 v-if="vault?.creatorId == account.id"
                     class="text-light vTitle d-flex justify-content-center align-items-end">
                     <div class="align-items-center d-flex">
-                        <button v-if="!vault?.isPrivate" class="btn big-btn" @click="makePrivate(vault?.id)"><i
-                                class="mdi mdi-lock text-warning"></i></button>
+                        <button title="Make private" v-if="!vault?.isPrivate" class="btn big-btn"
+                            @click="makePrivate(vault?.id)"><i class="mdi mdi-lock text-warning"></i></button>
                     </div>
                 </h6>
             </div>
@@ -132,6 +132,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.makecover {
+    background-position: center;
+    background-size: cover;
+    min-height: 500px;
+}
+
 .big-btn {
     font-size: 48px;
 }

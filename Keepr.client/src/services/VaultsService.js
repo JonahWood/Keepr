@@ -21,8 +21,8 @@ AppState.activeVault = res.data
 logger.log('vault:', res.data)
 }
 
-async getProfileVaults(){
-    const res = await api.get('/api/profiles/' + AppState.profile.id +'/vaults')
+async getProfileVaults(profileId){
+    const res = await api.get('/api/profiles/' + profileId +'/vaults')
     AppState.vaults = res.data
 }
 
