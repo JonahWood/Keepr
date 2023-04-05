@@ -29,10 +29,7 @@
                                 <div class="row mt-md-5">
                                     <div class="col-md-12 d-flex align-self-center">
                                         <span>
-                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
-                                                    title="Delete Keep" v-if="activeKeep?.creatorId == account?.id"
-                                                    class="selectable" @click="deleteKeep(activeKeep?.id)"><i
-                                                        class="mdi mdi-delete-forever"></i></span></h1>
+                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}</h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>
                                         </span>
                                     </div>

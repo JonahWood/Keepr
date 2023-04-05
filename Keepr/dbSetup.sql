@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS vaults(
             DROP TABLE favorites;
             DROP TABLE ingredients;
             DROP TABLE recipes;
+            DROP TABLE accounts;
             
             SELECT * FROM keeps
             WHERE id = 37;
