@@ -106,7 +106,8 @@ export default {
                     }
                 }
                 catch (error) {
-                    Pop.error(error.message)
+                    // NOTE i replaced the pop.error with a pop.toast, so cross fingers that this doesnt have an actual error
+                    Pop.toast(`${AppState.activeVault.name} is already private!`)
                     logger.error(error)
                 }
             },
