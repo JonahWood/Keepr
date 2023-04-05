@@ -21,16 +21,17 @@
                             <div class="col-md-7">
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
-                                        <h6 class="views"><i class="mdi mdi-eye"></i> {{ activeKeep?.views }} | <i
-                                                class="mdi mdi-alpha-k-box-outline"></i> {{ activeKeep?.kept }}</h6>
+                                        <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views }}
+                                            | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
+                                            }}</h6>
                                     </div>
                                 </div>
                                 <div class="row mt-md-5">
                                     <div class="col-md-12 d-flex align-self-center">
                                         <span>
                                             <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
-                                                    v-if="activeKeep?.creatorId == account?.id" class="selectable"
-                                                    @click="deleteKeep(activeKeep?.id)"><i
+                                                    title="Delete Keep" v-if="activeKeep?.creatorId == account?.id"
+                                                    class="selectable" @click="deleteKeep(activeKeep?.id)"><i
                                                         class="mdi mdi-delete-forever"></i></span></h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>
                                         </span>

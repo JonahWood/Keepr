@@ -14,8 +14,8 @@
       <div class="col-md-2 d-flex justify-content-center">
         <h1>
           {{ account.name }} <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample" title="Edit Account" class="btn btn-success">Edit<i
-              class="mdi mdi-note"></i></button></h1>
+            aria-controls="offcanvasExample" title="Edit Account" class="btn btn-success">Edit<i class="mdi mdi-note"
+              title="Edit Account"></i></button></h1>
       </div>
     </section>
     <section class="row justify-content-center">

@@ -13,8 +13,9 @@
                                 <div class="col-md-7">
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-center">
-                                            <h6 class="views"><i class="mdi mdi-eye"></i> {{ activeKeep?.views }} | <i
-                                                    class="mdi mdi-alpha-k-box-outline"></i> {{ activeKeep?.kept }}</h6>
+                                            <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views
+                                            }} | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{
+    activeKeep?.kept }}</h6>
                                         </div>
                                     </div>
                                     <div class="row mt-md-5">
