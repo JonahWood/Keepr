@@ -2,8 +2,10 @@ import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
 import { AppState } from "../AppState";
 import { applyStyles } from "@popperjs/core";
+import { useRouter } from "vue-router";
 
 class KeepsService{
+
     async getAllKeeps(){
     AppState.keeps = []
         const res = await api.get('api/keeps')
@@ -29,8 +31,12 @@ class KeepsService{
         logger.log(AppState.keeps)
     }
     async createKeep(formData){
+        AppState.createdKeep = {}
 const res = await api.post('api/keeps', formData)
 AppState.keeps.push(res.data)
+AppState.createdKeep = res.data
+logger.log('createdKeep:', AppState.createdKeep)
+
     }
 
     async getProfileKeeps(){

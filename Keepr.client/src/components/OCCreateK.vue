@@ -39,10 +39,13 @@ import { keepsService } from '../services/KeepsService'
 import { vaultsService } from '../services/VaultsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
+import { useRouter } from 'vue-router'
+import { AppState } from '../AppState'
 
 export default {
     setup() {
         const editable = ref({})
+        const router = useRouter()
         return {
             editable,
             async createKeep() {
@@ -50,6 +53,8 @@ export default {
                     const formData = editable.value
                     await keepsService.createKeep(formData)
                     Pop.success('Keep Created')
+                    router.push({ name: 'Keep', params: { keepId: (AppState.createdKeep.id) } })
+
                     editable.value = []
                 }
                 catch (error) {
