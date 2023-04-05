@@ -11,10 +11,11 @@
       </div>
     </section>
     <section class="row justify-content-center">
-      <div class="col-md-1 d-flex justify-content-center">
-        <h1 class="selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-          aria-controls="offcanvasExample">
-          {{ account.name }}</h1>
+      <div class="col-md-2 d-flex justify-content-center">
+        <h1>
+          {{ account.name }} <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample" title="Edit Account" class="btn btn-success">Edit<i
+              class="mdi mdi-note"></i></button></h1>
       </div>
     </section>
     <section class="row justify-content-center">
@@ -49,16 +50,16 @@
       <form @submit.prevent="editAccount()">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input v-model="editable.name" type="text" minLength="3" maxlength="15" class="form-control" id="name"
+          <input required v-model="editable.name" type="text" minLength="3" maxlength="15" class="form-control" id="name"
             name="name">
         </div>
         <div>
           <label for="picture" class="form-label">Picture URL</label>
-          <input v-model="editable.picture" class="form-control" id="picture" type="text">
+          <input required v-model="editable.picture" class="form-control" id="picture" type="text">
         </div>
         <div>
           <label for="coverImg" class="form-label">CoverImg</label>
-          <input v-model="editable.coverImg" class="form-control" id="coverImg" type="text">
+          <input required v-model="editable.coverImg" class="form-control" id="coverImg" type="text">
         </div>
         <button data-bs-dismiss="offcanvas" class="btn btn-success" type="submit">Save Changes</button>
       </form>

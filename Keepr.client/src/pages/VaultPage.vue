@@ -20,14 +20,15 @@
             <div class="col-1 keepCount">
                 {{ keeps.length }} Keeps
                 <div class="d-flex justify-content-center" v-if="vault?.creatorId == account.id">
-                    <h3><i class="mdi mdi-delete-forever text-danger selectable" @click="deleteVault(vault?.id)"></i></h3>
+                    <h3 title="Delete Vault"><i class="mdi mdi-delete-forever text-danger selectable"
+                            @click="deleteVault(vault?.id)"></i></h3>
                 </div>
             </div>
         </section>
         <div class="row mt-2">
             <section class="grid-container rounded">
                 <div v-for="k in keeps" class="col-md-3">
-                    <KeepCard :keep="k" />
+                    <VKeepCard :keep="k" />
                 </div>
             </section>
         </div>
@@ -45,6 +46,7 @@ import { AppState } from '../AppState';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { vkService } from '../services/VKService'
 import KeepCard from '../components/KeepCard.vue';
+import VKeepCard from '../components/VKeepCard.vue';
 
 export default {
     setup() {
@@ -121,7 +123,7 @@ export default {
             }
         };
     },
-    components: { KeepCard }
+    components: { KeepCard, VKeepCard }
 }
 </script>
 
