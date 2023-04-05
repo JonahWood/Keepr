@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
-                                        <div>
+                                        <div v-if="account.id">
                                             <form @submit.prevent="addKeep()">
                                                 <select v-model="editable.vaultId" class="form-select mb-3" required>
                                                     <option v-for="v in myVaults" :value="v.id">{{ v.name }}</option>
@@ -141,7 +141,9 @@ export default {
                 try {
                     await keepsService.setActive(id)
                     Modal.getOrCreateInstance("#KeepCardModal").show()
-                    await vaultsService.getMyVaults()
+                    if (AppState.account.id) {
+                        await vaultsService.getMyVaults()
+                    }
                     logger.log('vaults:', AppState.vaults)
                     await vkService.setActiveVK(id)
                     logger.log('THIS IS THE ACTIVE VK:', AppState.activeVK)

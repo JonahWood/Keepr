@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-2 d-flex justify-content-between">
+  <div class="mb-2 d-flex justify-content-between" v-if="account.id">
     <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
       data-bs-target="#CreateKeep">Create Keep</button>
     <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
@@ -44,7 +44,8 @@ export default {
       }
     }
     return {
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      account: computed(() => AppState.account)
     };
   },
   components: { OCCreateK, OCCreateV }
