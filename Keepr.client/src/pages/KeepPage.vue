@@ -1,5 +1,19 @@
 <template>
-    a
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid rounded elevation-5" :src="keep?.img" alt="">
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <h1 class="keep-title">{{ keep?.name }}
+                    <br /><span class="k-desc">{{ keep?.description }}</span>
+                    <div class="on-hover creator-name">by {{ keep?.creator.name }}
+                        <img class="profile-picture elevation-5" :src="keep?.creator.picture" alt="">
+                    </div>
+                </h1>
+            </div>
+        </div>
+    </div>
 </template>
 
 
@@ -43,4 +57,24 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.profile-picture {
+    height: 4vh;
+    width: 4vh;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.keep-title {
+    font-family: 'Marko One', serif;
+    user-select: none;
+}
+
+.k-desc {
+    font-size: 24px !important;
+}
+
+.creator-name {
+    font-size: 16px !important;
+}
+</style>
