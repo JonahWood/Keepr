@@ -144,7 +144,7 @@ export default {
 
 .keepCount {
     font-family: 'Marko One', serif;
-    color: #636E72;
+    color: #000000;
 }
 
 .grid-container {

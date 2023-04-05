@@ -30,6 +30,9 @@
       <div class="col-md-3" v-for="v in vaults">
         <VaultCard :vault="v" />
       </div>
+      <div class="col-md-3" v-if="keeps.length == 0">
+        No Vaults!
+      </div>
     </section>
     <section class="row">
       <div class="col-12">
