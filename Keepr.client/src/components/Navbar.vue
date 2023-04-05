@@ -17,10 +17,10 @@
           <router-link :to="{ name: 'Home' }" class="btn home-button selectable bg-gradient">
             Home
           </router-link>
-          <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
+          <!-- <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
             data-bs-target="#CreateKeep">Create Keep</button>
           <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
-            data-bs-target="#CreateVault">Create Vault</button>
+            data-bs-target="#CreateVault">Create Vault</button> -->
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
@@ -28,8 +28,8 @@
     </div>
   </nav>
 
-  <OCCreateK />
-  <OCCreateV />
+  <!-- <OCCreateK />
+  <OCCreateV /> -->
 </template>
 
 <script>

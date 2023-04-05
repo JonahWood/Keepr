@@ -1,4 +1,10 @@
 <template>
+  <div class="mb-2 d-flex justify-content-between">
+    <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
+      data-bs-target="#CreateKeep">Create Keep</button>
+    <button class="btn create-button ms-md-2 bg-gradient" type="button" data-bs-toggle="modal"
+      data-bs-target="#CreateVault">Create Vault</button>
+  </div>
   <div class="Kbody">
     <div class="row">
       <section class="grid-container rounded">
@@ -8,6 +14,9 @@
       </section>
     </div>
   </div>
+
+  <OCCreateK />
+  <OCCreateV />
 </template>
 
 <script>
@@ -16,29 +25,44 @@ import { keepsService } from '../services/KeepsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { AppState } from "../AppState";
+import OCCreateK from '../components/OCCreateK.vue';
+import OCCreateV from '../components/OCCreateV.vue';
 
 export default {
   setup() {
     onMounted(() => {
       getAllKeeps();
-    })
+    });
     async function getAllKeeps() {
       try {
-        AppState.keeps = []
-        await keepsService.getAllKeeps()
-      } catch (error) {
-        Pop.error(error.message)
-        logger.error(error)
+        AppState.keeps = [];
+        await keepsService.getAllKeeps();
+      }
+      catch (error) {
+        Pop.error(error.message);
+        logger.error(error);
       }
     }
     return {
       keeps: computed(() => AppState.keeps)
-    }
-  }
+    };
+  },
+  components: { OCCreateK, OCCreateV }
 }
 </script>
 
 <style scoped lang="scss">
+.create-button {
+  background-color: #d5d6a8;
+  border-bottom: 0px solid black !important;
+  border: solid 1px '#d4af37k';
+  border-bottom-left-radius: 10% !important;
+  border-bottom-right-radius: 10% !important;
+  border-color: #d4af37;
+  box-shadow: 2px 2px 2px #4d4015c1;
+  font-family: 'Oxygen', sans-serif;
+}
+
 .Kbody {
   display: flex;
   justify-content: center;
