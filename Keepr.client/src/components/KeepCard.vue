@@ -26,9 +26,9 @@
                             <div class="row">
                                 <!-- <div class="col-md-12 d-flex justify-content-center">
                                         <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views }}
-                                                                        | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
-                                                                        }}</h6>
-                                                                </div> -->
+                                                                                    | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
+                                                                                    }}</h6>
+                                                                            </div> -->
                                 </div>
                                 <div class="row mt-md-5">
                                     <div class="col-md-12">
@@ -215,6 +215,13 @@ export default {
 
 
 <style lang="scss" scoped>
+.vTitle {
+    min-height: 20vh;
+    width: 100%;
+    font-family: 'Marko One', serif;
+    text-shadow: 2px 2px 2px black;
+}
+
 .move-stuff {
     transform: translateY(-5vh);
     color: white;
