@@ -5,6 +5,8 @@
                 <img class="img-fluid rounded elevation-5" :src="keep?.img" alt="">
             </div>
             <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <h3 title="Delete Keep" class="selectable" @click="deleteKeep(keep?.id)"><i
+                        class="mdi mdi-delete-forever test-danger"></i></h3>
                 <h1 class="keep-title">{{ keep?.name }}
                     <br /><span class="k-desc">{{ keep?.description }}</span>
                     <!-- <div class="on-hover creator-name">by {{ keep?.creator.name }}
@@ -45,12 +47,26 @@ export default {
                 await keepsService.setActive(keepId);
             }
             catch (error) {
+                router.push({ name: "Home" })
                 Pop.error(error.message)
                 logger.error(error);
             }
         }
         return {
-            keep: computed(() => AppState.activeKeep)
+            keep: computed(() => AppState.activeKeep),
+            async deleteKeep(keepId) {
+                try {
+                    if (await Pop.confirm("Are you sure you'd like to delete this keep?")) {
+                        await keepsService.deleteKeep(keepId)
+                        router.push({ name: "Home" })
+                        Pop.success('Keep deleted')
+                    }
+                }
+                catch (error) {
+                    Pop.error(error.message)
+                    logger.error(error)
+                }
+            }
         }
     }
 }

@@ -11,7 +11,7 @@
       </div>
     </section>
     <section class="row justify-content-center">
-      <div class="col-md-2 d-flex justify-content-center">
+      <div class="col-md-6 d-flex justify-content-center">
         <h1>
           {{ account.name }} <button type="button" data-bs-toggle="offcanvas" data-bs-target="#EditAccount"
             aria-controls="EditAccount" title="Edit Account" class="btn btn-success">Edit<i class="mdi mdi-note"

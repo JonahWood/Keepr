@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <section class="row justify-content-center mt-2">
-            <div class="col-6 rounded makecover" :style="`background-image: url(${vault?.img})`">
+            <div class="col-md-6 rounded makecover" :style="`background-image: url(${vault?.img})`">
                 <h1 class="text-uppercase vTitle text-light d-flex justify-content-center align-items-end">{{ vault?.name }}
                 </h1>
                 <h6 class="creator text-light d-flex justify-content-center align-items-end">by {{
@@ -16,8 +16,8 @@
             </div>
         </section>
         <section class="row mt-2 justify-content-center">
-            <div class="col-1 keepCount">
-                {{ keeps.length }} Keeps
+            <div class="col-md-6 keepCount">
+                <h6 class=" d-flex justify-content-center">{{ keeps.length }} Keeps</h6>
                 <div class="d-flex justify-content-center" v-if="vault?.creatorId == account.id">
                     <h3 title="Delete Vault"><i class="mdi mdi-delete-forever text-danger selectable"
                             @click="deleteVault(vault?.id)"></i></h3>
@@ -200,5 +200,49 @@ export default {
     width: 100%;
     font-family: 'Marko One', serif;
     text-shadow: 2px 2px 2px black;
+}
+
+@media screen and (max-width: 900px) {
+    .grid-container {
+        columns: 2 100px;
+        column-gap: 1.5rem;
+        width: 90%;
+        margin: 0 auto;
+
+        div {
+            width: 150px;
+            margin: 0 1.5rem 1.5rem 0;
+            display: inline-block;
+            width: 100%;
+            border: solid 1px black;
+            padding: 5px;
+            box-shadow: 2px 2px 2px #00000080;
+            border-radius: 5px;
+            transition: all .25s ease-in-out;
+
+            &:hover img {
+                filter: grayscale(0);
+            }
+
+            &:hover {
+                border-color: #d4af37;
+                box-shadow: 4px 4px 4px #4d4015c1;
+            }
+
+            img {
+                width: 100%;
+                filter: grayscale(100%);
+                border-radius: 5px;
+                transition: all .25s ease-in-out;
+            }
+
+            p {
+                margin: 5px 0;
+                padding: 0;
+                text-align: center;
+                font-style: italic;
+            }
+        }
+    }
 }
 </style>
