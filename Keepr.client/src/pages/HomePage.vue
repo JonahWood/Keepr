@@ -6,7 +6,7 @@
       data-bs-target="#CreateVault">Create Vault</button>
   </div>
   <div class="Kbody">
-    <div class="row">
+    <div class="row no-pad-marge">
       <section class="grid-container rounded">
         <div class="col-6 col-md-3" v-for="k in keeps">
           <KeepCard :keep="k" />
@@ -53,6 +53,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.no-pad-marge {
+  padding: 0px 0px 0px 0px !important;
+  margin: 0px 0px 0px 0px !important;
+
+}
+
 .create-button {
   background-color: #d5d6a8;
   border-bottom: 0px solid black !important;
@@ -74,8 +80,8 @@ export default {
 .grid-container {
   columns: 4 200px;
   column-gap: 1.5rem;
-  width: 90%;
-  margin: 0 auto;
+  width: 98%;
+  margin: 0;
 
   div {
     width: 150px;

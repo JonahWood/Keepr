@@ -21,36 +21,35 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-5 d-flex justify-content-center align-items-center">
+                            <div class="col-md-5 d-flex justify-content-center">
                                 <img class="img-fluid keep-img" :src="activeKeep?.img" alt="">
                             </div>
-                            <div class="col-md-7 d-flex align-items-center justify-content-center">
-                                <div class="row">
-
-                                </div>
+                            <div class="col-md-7 d-flex justify-content-center">
                                 <div class="row mt-md-5">
-                                    <div class="col-md-12">
-                                        <span>
-                                            <div class="col-md-12 d-flex justify-content-center">
-                                                <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{
-                                                    activeKeep?.views }}
-                                                    | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{
-                                                        activeKeep?.kept
-                                                    }}</h6>
-                                            </div>
-                                            <span title="Remove keep from vault"
-                                                v-if="activeVault?.creatorId == account?.id && keepBool" class="selectable"
-                                                @click="removeFromVault(activeVK?.vaultKeepId)"><i
-                                                    class="mdi mdi-minus-box"></i>Remove Keep</span>
-                                            <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}<span
-                                                    title="Delete Keep" v-if="activeKeep?.creatorId == account?.id"
-                                                    class="selectable" @click="deleteKeep(activeKeep?.id)"><i
-                                                        class="mdi mdi-delete-forever"></i></span>
-                                            </h1>
-                                            <h5 class="mx-4">{{ activeKeep?.description }}</h5>
-                                        </span>
+                                    <div class="col-md-12 d-flex justify-content-center align-items-start">
+                                        <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{
+                                            activeKeep?.views }}
+                                            | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{
+                                                activeKeep?.kept
+                                            }}</h6>
                                     </div>
-                                    <div class="col-md-12 d-flex justify-content-between">
+                                    <div class="col-md-12">
+                                        <div class="d-flex align-items-center">
+                                            <span class="">
+                                                <span title="Remove keep from vault"
+                                                    v-if="activeVault?.creatorId == account?.id && keepBool"
+                                                    class="selectable" @click="removeFromVault(activeVK?.vaultKeepId)"><i
+                                                        class="mdi mdi-minus-box"></i>Remove Keep</span>
+                                                <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name
+                                                }}<span title="Delete Keep" v-if="activeKeep?.creatorId == account?.id"
+                                                        class="selectable" @click="deleteKeep(activeKeep?.id)"><i
+                                                            class="mdi mdi-delete-forever"></i></span>
+                                                </h1>
+                                                <h5 class="mx-4">{{ activeKeep?.description }}</h5>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-between align-items-end">
                                         <div v-if="account.id">
                                             <form @submit.prevent="addKeep()">
                                                 <select v-model="editable.vaultId" class="form-select mb-3" required>
