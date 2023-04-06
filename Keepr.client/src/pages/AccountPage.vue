@@ -13,8 +13,8 @@
     <section class="row justify-content-center">
       <div class="col-md-2 d-flex justify-content-center">
         <h1>
-          {{ account.name }} <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample" title="Edit Account" class="btn btn-success">Edit<i class="mdi mdi-note"
+          {{ account.name }} <button type="button" data-bs-toggle="offcanvas" data-bs-target="#EditAccount"
+            aria-controls="EditAccount" title="Edit Account" class="btn btn-success">Edit<i class="mdi mdi-note"
               title="Edit Account"></i></button></h1>
       </div>
     </section>
@@ -41,9 +41,9 @@
     </section>
   </div>
 
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="EditAccount" aria-labelledby="EditAccountLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <h5 class="offcanvas-title" id="EditAccountLabel">Offcanvas</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">

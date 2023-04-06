@@ -7,7 +7,7 @@
             <img class="img-fluid" :src="keep?.img" alt="">
         </div>
         <div class="d-flex justify-content-between mt-1 move-stuff">
-            <h5>{{ keep?.name }}</h5>
+            {{ keep?.name }}
             <img :title="keep?.creator.name" class="profile-picture" :src="keep?.creator.picture" alt="">
         </div>
     </div>
@@ -26,9 +26,9 @@
                             <div class="row">
                                 <!-- <div class="col-md-12 d-flex justify-content-center">
                                         <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views }}
-                                                                                            | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
-                                                                                            }}</h6>
-                                                                                    </div> -->
+                                                                                                    | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
+                                                                                                    }}</h6>
+                                                                                            </div> -->
                                 </div>
                                 <div class="row mt-md-5">
                                     <div class="col-md-12">
