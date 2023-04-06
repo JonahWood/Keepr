@@ -19,16 +19,12 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-5 d-flex justify-content-center align-items-center">
                                 <img class="img-fluid keep-img" :src="activeKeep?.img" alt="">
                             </div>
-                        <div class="col-md-7 d-flex align-items-center justify-content-center">
-                            <div class="row">
-                                <!-- <div class="col-md-12 d-flex justify-content-center">
-                                        <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views }}
-                                                                                                    | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
-                                                                                                    }}</h6>
-                                                                                            </div> -->
+                            <div class="col-md-7 d-flex align-items-center justify-content-center">
+                                <div class="row">
+
                                 </div>
                                 <div class="row mt-md-5">
                                     <div class="col-md-12">
@@ -259,7 +255,6 @@ export default {
 }
 
 .keep-img {
-    min-height: 450px;
-    min-width: 100% !important;
+    max-height: 85vh;
 }
 </style>
