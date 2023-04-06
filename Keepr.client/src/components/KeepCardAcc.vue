@@ -1,5 +1,5 @@
 <template>
-    <h3 class="vTitle text-light rounded elevation-5 selectable text-lowercase"
+    <h3 class="vTitle text-light rounded elevation-5 selectable text-lowercase makecover"
         :style="`background-image: url(${keep?.img})`" @click="setActive(keep?.id)" type="button" data-bs-toggle="modal"
         data-bs-target="#KeepCardModalAcc">{{
             keep?.name }}</h3>

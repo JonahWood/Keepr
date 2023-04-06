@@ -37,4 +37,10 @@ footer {
   place-content: center;
   height: 32px;
 }
+
+.makecover {
+  background-position: center;
+  background-size: cover;
+  min-height: 500px;
+}
 </style>
