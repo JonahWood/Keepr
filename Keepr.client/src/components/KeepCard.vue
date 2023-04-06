@@ -1,12 +1,14 @@
 <!-- FIXME something wacky is going on when trying to see keep details when youre not logged in -->
+<!-- LINK fixed -->
 <!-- FIXME also theres some horizontal scroll because of some goofy thing i did -->
 <!-- FIXME the spacing of the last part of the modal is kinda being funky, gonna need to take a look at that -->
+<!-- LINK fixed -->
 <template>
     <div @click="setActive(keep?.id)" class="selectable">
         <div>
             <img class="img-fluid" :src="keep?.img" alt="">
         </div>
-        <div class="d-flex justify-content-between mt-1 move-stuff">
+        <div class="d-flex justify-content-between mt-1 move-stuff vTitle-2 ms-md-1">
             {{ keep?.name }}
             <img :title="keep?.creator.name" class="profile-picture" :src="keep?.creator.picture" alt="">
         </div>
@@ -218,10 +220,16 @@ export default {
     text-shadow: 2px 2px 2px black;
 }
 
+.vTitle-2 {
+    font-family: 'Marko One', serif;
+    text-shadow: 2px 2px 2px black;
+}
+
 .move-stuff {
     transform: translateY(-5vh);
     color: white;
     text-shadow: 2px 2px 1px black;
+    position: absolute;
 }
 
 .profile-picture {
