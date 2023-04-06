@@ -40,10 +40,11 @@ export default class Pop {
  * @param {'top' | 'top-start' | 'top-end' | 'center' | 'center-start' | 'center-end' | 'bottom' | 'bottom-start' | 'bottom-end'} position
  * @param {number} timer Time in milliseconds.
  * @param {boolean} progressBar Show progress bar or not respectively.
+ * @param {string} background Background color of the pop
  * -----------------------------------
  * {@link https://sweetalert2.github.io/#configuration|Check out Sweet Alerts}
  */
-  static toast(title = 'Warning!', icon = 'warning', position = 'top-end', timer = 1500, progressBar = true) {
+  static toast(title = 'Warning!', icon = 'warning', position = 'top-end', timer = 2000, progressBar = true, background = '#FFD700') {
     Swal.fire({
       title,
       icon,
@@ -51,7 +52,8 @@ export default class Pop {
       timer,
       timerProgressBar: progressBar,
       toast: true,
-      showConfirmButton: false
+      showConfirmButton: false,
+      background
     })
   }
 
