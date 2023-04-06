@@ -19,7 +19,7 @@
                                 class="form-control" id="Description">
                         </div>
                         <label for="Img">Img</label>
-                        <input required v-model="editable.Img" type="text" class="form-control" id="Img">
+                        <input min-length="20" required v-model="editable.Img" type="text" class="form-control" id="Img">
 
 
                         <div class="d-flex justify-content-end">
