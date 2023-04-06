@@ -54,9 +54,9 @@ export default {
                     const formData = editable.value
                     await keepsService.createKeep(formData)
                     Pop.success('Keep Created')
-                    router.push({ name: 'Keep', params: { keepId: (AppState.createdKeep.id) } })
+                    // router.push({ name: 'Keep', params: { keepId: (AppState.createdKeep.id) } })
 
-                    editable.value = []
+                    editable.value = {}
                 }
                 catch (error) {
                     Pop.error(error.message)
