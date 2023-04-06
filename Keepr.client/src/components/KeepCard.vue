@@ -196,9 +196,8 @@ export default {
                     logger.log('vkId', vkId)
                     if (await Pop.confirm("Are you sure you'd like to remove this keep from this album?")) {
                         await vkService.removeFromVault(vkId)
-                        Pop.success('Keep removed from vault')
                         Modal.getOrCreateInstance('#KeepCardModal').hide()
-
+                        Pop.success('Keep removed from vault')
                     }
                 }
                 catch (error) {
