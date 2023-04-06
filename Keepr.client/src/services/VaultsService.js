@@ -29,6 +29,7 @@ async getProfileVaults(profileId){
 async makePrivate(vaultId, isPrivate){
     const res = await api.put(`api/vaults/${vaultId}`, isPrivate)
     logger.log('MakePrivate:', res.data)
+    AppState.activeVault.isPrivate = true
 }
 
 async deleteVault(vaultId){

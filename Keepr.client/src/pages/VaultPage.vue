@@ -10,7 +10,10 @@
                     class="text-light vTitle d-flex justify-content-center align-items-end">
                     <div class="align-items-center d-flex">
                         <button title="Make private" v-if="!vault?.isPrivate" class="btn big-btn"
-                            @click="makePrivate(vault?.id)"><i class="mdi mdi-lock text-warning"></i></button>
+                            @click="makePrivate(vault?.id)"><i
+                                class="mdi mdi-lock-open-variant text-warning lock-shadow"></i></button>
+                        <button title="Vault is already private" v-if="vault?.isPrivate" class="btn big-btn" disabled><i
+                                class="mdi mdi-lock text-warning lock-shadow"></i></button>
                     </div>
                 </h6>
             </div>
@@ -106,8 +109,7 @@ export default {
                     }
                 }
                 catch (error) {
-                    // NOTE i replaced the pop.error with a pop.toast, so cross fingers that this doesnt have an actual error
-                    Pop.toast(`${AppState.activeVault.name} is already private!`)
+                    Pop.error(error.message)
                     logger.error(error)
                 }
             },
@@ -132,6 +134,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.lock-shadow {
+    text-shadow: 2px 2px 2px #000000;
+}
+
 .makecover {
     background-position: center;
     background-size: cover;
