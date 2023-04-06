@@ -15,39 +15,27 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-5 d-flex justify-content-center align-items-center">
                                 <img class="img-fluid keep-img" :src="activeKeep?.img" alt="">
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-7 d-flex align-items-center justify-content-center">
                                 <div class="row">
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                        <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{ activeKeep?.views }}
-                                            | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{ activeKeep?.kept
-                                            }}</h6>
-                                    </div>
+
                                 </div>
                                 <div class="row mt-md-5">
                                     <div class="col-md-12 d-flex align-self-center">
                                         <span>
+                                            <div class="col-md-12 d-flex justify-content-center">
+                                                <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{
+                                                    activeKeep?.views }}
+                                                    | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{
+                                                        activeKeep?.kept
+                                                    }}</h6>
+                                            </div>
                                             <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}</h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>
                                         </span>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">&nbsp;</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">&nbsp;</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">&nbsp;</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">&nbsp;</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">&nbsp;</div>
                                 </div>
                                 <!-- <div class="row d-flex align-self-end">
                                     <div class="col-md-12 d-flex justify-content-between">
@@ -108,6 +96,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.keep-img {
+    max-height: 85vh;
+}
+
 .profile-picture {
     height: 4vh;
     width: 4vh;
