@@ -10,20 +10,21 @@
                     <form @submit.prevent="createVault()">
                         <div class="mb-2">
                             <label for="name">Name</label>
-                            <input required v-model="editable.name" type="text" class="form-control" id="name">
+                            <input maxlength="50" min-length="3" required v-model="editable.name" type="text"
+                                class="form-control" id="name">
                         </div>
                         <div class="mb-2">
                             <label for="Description">Description</label>
-                            <input required v-model="editable.Description" type="text" class="form-control"
-                                id="Description">
+                            <input maxlength="200" min-length="3" required v-model="editable.Description" type="text"
+                                class="form-control" id="Description">
                         </div>
                         <label for="Img">Img</label>
                         <input required v-model="editable.Img" type="text" class="form-control" id="Img">
 
 
                         <div class="d-flex justify-content-end">
-                            <button class="btn create-button ms-md-2 bg-gradient mt-3"
-                                data-bs-dismiss="modal">Create</button>
+                            <button class="btn create-button ms-md-2 bg-gradient mt-3" data-bs-dismiss="modal"
+                                type="submit">Create</button>
                         </div>
                     </form>
                 </div>
