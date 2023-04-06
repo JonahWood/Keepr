@@ -9,7 +9,7 @@
             <img class="img-fluid" :src="keep?.img" alt="">
         </div>
         <div class="d-flex justify-content-between mt-1 move-stuff vTitle-2 ms-md-1">
-            {{ keep?.name }}
+            {{ keep?.name }}&nbsp;
             <img :title="keep?.creator.name" class="profile-picture" :src="keep?.creator.picture" alt="">
         </div>
     </div>
