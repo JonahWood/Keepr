@@ -23,15 +23,15 @@
 
                                 </div>
                                 <div class="row mt-md-5">
+                                    <div class="col-md-12 d-flex justify-content-center align-items-start">
+                                        <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{
+                                            activeKeep?.views }}
+                                            | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{
+                                                activeKeep?.kept
+                                            }}</h6>
+                                    </div>
                                     <div class="col-md-12 d-flex align-self-center">
                                         <span>
-                                            <div class="col-md-12 d-flex justify-content-center">
-                                                <h6 class="views"><i class="mdi mdi-eye" title="views"></i> {{
-                                                    activeKeep?.views }}
-                                                    | <i class="mdi mdi-alpha-k-box-outline" title="kept"></i> {{
-                                                        activeKeep?.kept
-                                                    }}</h6>
-                                            </div>
                                             <h1 class="keep-title d-flex justify-content-center">{{ activeKeep?.name }}</h1>
                                             <h5 class="mx-4">{{ activeKeep?.description }}</h5>
                                         </span>
